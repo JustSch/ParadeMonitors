@@ -15,7 +15,7 @@ public class Parade extends Object {
 	//Parade is critical section
 	
 	//multiple threads CAN wait on same object. Execute notify or notifyall!!!!!!!!!!!
-	
+	//.notify for order?
 	
 	//Look at how Readers Know they are done with CS!!!!!!
 	private int numGreen = 14;
