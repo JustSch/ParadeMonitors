@@ -14,7 +14,7 @@ public class Marching {
 	private static int paraders;
 	private static int paradersEntered =0;
 	private static int paradeGroupsFormed=0;// use this to tell where in vector to form next group Have mod to go back in parade?
-	private static Object ClockNotifier = new Object();
+	private static Object ClockNotifier = new Object();   //No things can keep being added to vector!!!
 	
 	
 	public Marching() {
