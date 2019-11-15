@@ -57,6 +57,8 @@ public class Parade extends Object {
 		 * for (Thread green :greenList) green.start(); // starts each thread in the
 		 * visitor Array using For Each Loop
 		 */		
+		
+		//Use these to test but then uncomment above to use for all threads!!!
 		Thread orangeStudent = new Thread(new OrangeStudent(march,"orange"));
 		orangeStudent.start();
 		Thread greenStudent = new Thread(new GreenStudent(march,"green"));
