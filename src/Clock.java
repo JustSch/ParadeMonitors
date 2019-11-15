@@ -20,11 +20,28 @@ public class Clock implements Runnable{
 		
 	}
 	
+	public synchronized void Age() {
+		long time = System.currentTimeMillis();
+		System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+time);
+	}
+	 public void msg(String m) {
+	 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
+	 }
 	public void run(){
 		
-		while(true) {
-			if (Marching.isParadeFilled())break;//Replace with wait in its own object then is signalled when filled?
+		msg("It is 12:00PM The Parade Has Started");
+		
+		try {
+			Thread.sleep(1500);
+			msg("It is 12:15PM. The First Show haas Started");
+			
+		} catch (InterruptedException e) {
+			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
 		}
+		while(true) {
+			if (Marching.isParadeFilled())break;//Replace with wait in its own object then is signalled when filled? yes use static one
+		}
+		
 		
 		
 	}

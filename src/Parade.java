@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -18,22 +19,44 @@ public class Parade extends Object {
 	//.notify for order?
 	
 	//Look at how Readers Know they are done with CS!!!!!!
-	private int numGreen = 14;
+	//Set These in Marching using get/set!!!!!!!!
+	private static int numGreen = 14;
 	private static int numOrange = 7;
 	private int numSeat = 6; // tent capacity
 	//private int ParadeNumber;
+	
 	
 	//Don't forget Age() method!!!
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		ArrayList<Thread> orangeList = new ArrayList<Thread>();
+		ArrayList<Thread> greenList = new ArrayList<Thread>();
 		//setNumOrange();
 		Marching march = new Marching();
 		march.startParade(getNumOrange());
 		Random random = new Random();
 		int walkingTime = 2000+ random.nextInt(500);// for walking around 20 min
 		
+		Thread clockThread = new Thread(new Clock("Clock")); // Makes Clock Thread
+
+		clockThread.start();
+
+		/*
+		 * for (int i = 0; i < numOrange; i++) { //Creates Each Thread With Array Used
+		 * Earlier Thread orangeStudent = new Thread(new
+		 * OrangeStudent(march,"orange "+i)); orangeList.add(orangeStudent); }
+		 * 
+		 * for (Thread orange :orangeList) orange.start(); // starts each thread in the
+		 * visitor Array using For Each Loop
+		 * 
+		 * for (int i = 0; i < numGreen; i++) { //Creates Each Thread With Array Used
+		 * Earlier Thread greenStudent = new Thread(new GreenStudent(march,"green "+i));
+		 * orangeList.add(greenStudent); }
+		 * 
+		 * for (Thread green :greenList) green.start(); // starts each thread in the
+		 * visitor Array using For Each Loop
+		 */		
 		Thread orangeStudent = new Thread(new OrangeStudent(march,"orange"));
 		orangeStudent.start();
 		Thread greenStudent = new Thread(new GreenStudent(march,"green"));

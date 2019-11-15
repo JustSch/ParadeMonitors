@@ -4,15 +4,16 @@ public class Marching {
 	//two green one orange in parade
 	//orange goes first and allows 2 greens?
 	//Create enough convey objects for each group?
-	private Vector greenInParade = new Vector(); //make convey object too
-	private Vector redInParade = new Vector();
+	//private Vector greenInParade = new Vector(); //make convey object too
+	//private Vector redInParade = new Vector();
 	private static Vector<Object> paradeGroups = new Vector<Object>();
-	private int greenStudents = 0;
-	private int orangeStudents=0;
+	private int greenStudents = 0;//has two
+	private int orangeStudents=0; //has one
 	private boolean hasOrange=false;
 	private static boolean paradeFilled;
 	private static int paraders;
 	private static int paradersEntered =0;
+	private static int paradeGroupsFormed=0;// use this to tell where in vector to form next group
 	
 	
 	public Marching() {
@@ -102,7 +103,7 @@ public class Marching {
 			System.out.println("there");
 			while (true) {
 				try {
-					//greenStudents++;
+					greenStudents++;
 					convey.wait();
 					break;
 				} catch (InterruptedException e) {
