@@ -4,14 +4,16 @@ public class Clock implements Runnable{
 	
 	public static long time = System.currentTimeMillis();
 	public String clockName;
+	public Object ClockNotifier = new Object();
 	
 	public Clock() {
 
 	}
-	public Clock(String clockName) { // Constructor Used To Set Thread Name
+	public Clock(String clockName,Object ClockNotifier) { // Constructor Used To Set Thread Name
 
 		setName(clockName);
 		this.clockName = clockName;
+		this.ClockNotifier=ClockNotifier;
 	}
 
 	public final void setName(String clockNameToSet) {
@@ -33,7 +35,7 @@ public class Clock implements Runnable{
 		
 		try {
 			Thread.sleep(1500);
-			msg("It is 12:15PM. The First Show haas Started");
+			msg("It is 12:15PM. The First Show has Started");
 			
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");

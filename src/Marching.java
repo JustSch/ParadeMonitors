@@ -13,7 +13,8 @@ public class Marching {
 	private static boolean paradeFilled;
 	private static int paraders;
 	private static int paradersEntered =0;
-	private static int paradeGroupsFormed=0;// use this to tell where in vector to form next group
+	private static int paradeGroupsFormed=0;// use this to tell where in vector to form next group Have mod to go back in parade?
+	private static Object ClockNotifier = new Object();
 	
 	
 	public Marching() {
@@ -126,6 +127,14 @@ public class Marching {
 
 	public static void setParadeFilled(boolean paradeFilled) {
 		Marching.paradeFilled = paradeFilled;
+	}
+
+	public static Object getClockNotifier() {
+		return ClockNotifier;
+	}
+
+	public static void setClockNotifier(Object clockNotifier) {
+		ClockNotifier = clockNotifier;
 	}
 	
 }
