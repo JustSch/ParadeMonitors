@@ -53,31 +53,14 @@ public class Marching {
 			}
 			else setParadeFilled(true);
 			System.out.println(Thread.currentThread().getName().substring(0,1));
-			if (!hasOrange && Thread.currentThread().getName().substring(0,1).contentEquals("o")) {
-				hasOrange = true;
+			if (Thread.currentThread().getName().substring(0,1).contentEquals("o")) {
+				//hasOrange = true;
 				//Critical Section!!
-				System.out.println("here");
-				while(true) {
-					try {
-						System.out.println(Thread.currentThread().getName());
-						orangeStudents++;
-						//System.out.println("f");
-						//convey = 
-						if (Thread.currentThread().getName().substring(0,1).contentEquals("g"))System.out.println("test");
-						convey.wait(); //paradeGroups.get(paradersEntered).wait(); can work too?
-						break;
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+				//System.out.println("here");
+				letOrangeInParade(convey);
 								
 			}
-			
-			else {
-				
-			}
-			
+					
 			
 			//For Greens Here
 			if (Thread.currentThread().getName().substring(0,1).contentEquals("g"))
@@ -96,6 +79,20 @@ public class Marching {
 	}
 	
 	public synchronized void letOrangeInParade(Object convey) {
+		while(true) {
+			try {
+				System.out.println(Thread.currentThread().getName());
+				orangeStudents++;
+				//System.out.println("f");
+				//convey = 
+				if (Thread.currentThread().getName().substring(0,1).contentEquals("g"))System.out.println("test");
+				convey.wait(); //paradeGroups.get(paradersEntered).wait(); can work too?
+				break;
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	public synchronized void letGreenInParade(Object convey) {
