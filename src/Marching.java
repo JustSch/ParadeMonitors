@@ -46,6 +46,7 @@ public class Marching {
 	public void letInParade() {
 		Object convey = new Object();
 		convey=paradeGroups.get(paradersEntered);//needs convey before synch!!!!!
+		paradersEntered++;     //need to add one before for mod to work
 		synchronized(convey) { //replace with 
 			//synchronized(this)  { ?
 			//Does this need to be passed in or it just chooses from vector?
@@ -65,7 +66,7 @@ public class Marching {
 				//hasOrange = true;
 				//Critical Section!!
 				//System.out.println("here");
-				letOrangeInParade(convey);					
+				letOrangeInParade(convey);	//pass in or calculate from vector?				
 			}
 					
 			
