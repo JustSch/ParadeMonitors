@@ -57,16 +57,13 @@ public class Marching {
 				//hasOrange = true;
 				//Critical Section!!
 				//System.out.println("here");
-				letOrangeInParade(convey);
-								
+				letOrangeInParade(convey);					
 			}
 					
 			
 			//For Greens Here
 			if (Thread.currentThread().getName().substring(0,1).contentEquals("g"))
-				letGreenInParade(convey);
-			
-			
+				letGreenInParade(convey);	
 		}
 		
 	}
