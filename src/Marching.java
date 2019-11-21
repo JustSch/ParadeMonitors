@@ -27,7 +27,7 @@ public class Marching {
 		for (int i =0;i<paradeNumber;i++) {
 			Object convey = new Object();
 			paradeGroups.add(convey);
-			paraders=paradeNumber;
+			//paraders=paradeNumber;
 		}
 		
 	}
@@ -46,12 +46,20 @@ public class Marching {
 	public void letInParade() {
 		Object convey = new Object();
 		convey=paradeGroups.get(paradersEntered);//needs convey before synch!!!!!
-		synchronized(convey) { //replace with synchronized(this) ?
-			if (!isParadeFilled() && paradersEntered!=paraders) {
-				
-				paraders++;
-			}
-			else setParadeFilled(true);
+		synchronized(convey) { //replace with 
+			//synchronized(this)  { ?
+			//Does this need to be passed in or it just chooses from vector?
+			
+			/*
+			 * if (!isParadeFilled() && paradersEntered!=paraders) {
+			 * 
+			 * paraders++; } else setParadeFilled(true)
+			 */;
+			 //Have start at 1?
+			 if (paradersEntered%3==0) {
+				 paradeGroupsFormed++;
+			 }
+			 paradersEntered++;//Use this to figure out which convey is passed
 			System.out.println(Thread.currentThread().getName().substring(0,1));
 			if (Thread.currentThread().getName().substring(0,1).contentEquals("o")) {
 				//hasOrange = true;
@@ -80,6 +88,7 @@ public class Marching {
 			try {
 				System.out.println(Thread.currentThread().getName());
 				orangeStudents++;
+				paradersEntered++;
 				//System.out.println("f");
 				//convey = 
 				if (Thread.currentThread().getName().substring(0,1).contentEquals("g"))System.out.println("test");
