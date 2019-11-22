@@ -16,7 +16,7 @@ public class OrangeStudent implements Runnable {
 		// TODO Auto-generated method stub
 		setName(name);
 		System.out.println(Thread.currentThread().getName());
-		march.letInParade();
+		march.letOrangeInParade();
 		
 		
 		march.exitParade();

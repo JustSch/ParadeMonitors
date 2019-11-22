@@ -13,7 +13,7 @@ public class GreenStudent implements Runnable {
 		// TODO Auto-generated method stub
 		setName(name);
 		System.out.println(Thread.currentThread().getName());
-		march.letInParade();
+		march.letGreenInParade();
 		
 		
 		march.exitParade();
