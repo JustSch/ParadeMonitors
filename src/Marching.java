@@ -17,7 +17,8 @@ public class Marching {
 	private static int paradeGroupsFormed = 0;// use this to tell where in vector to form next group Have mod to go back
 	// in parade?
 	private static Object ClockNotifier = new Object(); // No things can keep being added to vector!!!
-	private static int greenParaders=0;
+	private static int greenParadeGroups = 0;
+
 	public Marching() {
 
 	}
@@ -72,8 +73,8 @@ public class Marching {
 			}
 
 			// For Greens Here
-			//if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-				//letGreenInParade(convey);
+			// if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
+			// letGreenInParade(convey);
 		}
 
 	}
@@ -87,65 +88,65 @@ public class Marching {
 	}
 
 	public void letOrangeInParade() {
-		Object convey = paradeGroups.get(paradersEntered);
+		Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number
 		synchronized (convey) {
-		while (true) {
-			try {
-				System.out.println(Thread.currentThread().getName());
+			while (true) {
+				try {
+					System.out.println(Thread.currentThread().getName());
 
-				orangeStudents++;
-				paradersEntered++;
-				// System.out.println("f");
-				// convey =
-				if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-					System.out.println("test");
-				//System.out.println("hhhhhhhhhh");
-				if (paradersEntered%3==0) //no gurantee that 3 who entered are in the right order must count green and orange!!!
-				{
-					groupFormed = true;
-					//paradeGroupsFormed++;
-					wakeClock();
+					orangeStudents++;
+					paradersEntered++;
+					// System.out.println("f");
+					// convey =
+					if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
+						System.out.println("test");
+					// System.out.println("hhhhhhhhhh");
+					if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
+													// green and orange!!!
+					{
+						groupFormed = true;
+						// paradeGroupsFormed++;
+						wakeClock();
+					}
+					convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
+					break;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
-				break;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
 
-	}
+		}
 	}
 
 	public void letGreenInParade() {
-		Object convey = paradeGroups.get(greenParaders);
+		Object convey = paradeGroups.get(greenParadeGroups);
 		synchronized (convey) {
-		
-		while (true) {
-			try {
-				//System.out.println("there");
-				System.out.println(Thread.currentThread().getName());
-				greenStudents++;
-				paradersEntered++;
-				if (greenStudents %2==0) {
-					greenParaders++;
+
+			while (true) {
+				try {
+					// System.out.println("there");
+					System.out.println(Thread.currentThread().getName());
+					greenStudents++;
+					paradersEntered++;
+					if (greenStudents+1 % 2 == 0) {
+						greenParadeGroups++;
+					}
+					if (paradersEntered % 3 == 0) {
+						groupFormed = true;
+						// paradeGroupsFormed++;
+						wakeClock();
+					}
+					convey.wait();
+					break;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				if (paradersEntered%3==0)
-				{
-					groupFormed = true;
-					//paradeGroupsFormed++;
-					wakeClock();
-				}
-				convey.wait();
-				break;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
 
 		}
-
-	}
 	}
 
 	public void anotherParade() {
@@ -175,22 +176,27 @@ public class Marching {
 	public void setGroupFormed(boolean groupFormed) {
 		this.groupFormed = groupFormed;
 	}
-	
+
 	public static Vector<Object> getParadeGroups() {
 		return paradeGroups;
 	}
-	
+
 	public void wakeClock() {
 		Object clockNotifier = ClockNotifier;
-		synchronized(clockNotifier) {
+		synchronized (clockNotifier) {
 			ClockNotifier.notify();
 		}
 	}
+
 	public static void releaseParadeGroups(int groupNumber) {
 		Object convey = paradeGroups.get(groupNumber);
-		synchronized(convey) {
+		synchronized (convey) {
 			convey.notifyAll();
 		}
+	}
+	
+	public synchronized int getGreenpadeGroup() {
+		return greenParadeGroups;
 	}
 
 }
