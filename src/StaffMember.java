@@ -15,7 +15,7 @@ public class StaffMember implements Runnable {
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub //While loop for paradesinSession and ShowsInSession!!!
 		setName(name);
 		msg("The Puppet Show Will Start Soon: Opening Tent");
 		march.waiting(StaffNotifier);
