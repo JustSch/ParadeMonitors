@@ -88,7 +88,7 @@ public class Marching {
 	}
 
 	public void letOrangeInParade() {
-		Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number
+		Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number Enforce by thread ID?
 		synchronized (convey) {
 			while (true) {
 				try {
