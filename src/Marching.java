@@ -7,7 +7,7 @@ public class Marching {
 	// private Vector greenInParade = new Vector(); //make convey object too
 	// private Vector redInParade = new Vector();
 	private static Vector<Object> paradeGroups = new Vector<Object>();
-	private int greenStudents = -1;// has two
+	private int greenStudents = 0;// has two
 	private int orangeStudents = -1; // has one
 	private boolean hasOrange = false;
 	private static boolean groupFormed = false;
@@ -138,11 +138,12 @@ public class Marching {
 		 * }
 		 */
 		System.out.println(Thread.currentThread().getName());
-		greenStudents++;
-		paradersEntered++;
-		if (greenStudents % 2 != 0) {
+		
+		if (greenStudents % 2 == 0 && greenStudents!=0) {
 			greenParadeGroups++;
 		}
+		greenStudents++;
+		paradersEntered++;
 		if (paradersEntered % 3 == 0) {
 			groupFormed = true;
 			// paradeGroupsFormed++;
