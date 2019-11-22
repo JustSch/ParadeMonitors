@@ -103,6 +103,7 @@ public class Marching {
 				if (paradersEntered%3==0) //no gurantee that 3 who entered are in the right order must count green and orange!!!
 				{
 					groupFormed = true;
+					//paradeGroupsFormed++;
 					wakeClock();
 				}
 				convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
@@ -132,6 +133,7 @@ public class Marching {
 				if (paradersEntered%3==0)
 				{
 					groupFormed = true;
+					//paradeGroupsFormed++;
 					wakeClock();
 				}
 				convey.wait();
