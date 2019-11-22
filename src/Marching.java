@@ -8,7 +8,7 @@ public class Marching {
 	// private Vector redInParade = new Vector();
 	private static Vector<Object> paradeGroups = new Vector<Object>();
 	private int greenStudents = -1;// has two
-	private int orangeStudents = 0; // has one
+	private int orangeStudents = -1; // has one
 	private boolean hasOrange = false;
 	private static boolean groupFormed = false;
 	private static boolean paradeFilled;
@@ -87,71 +87,70 @@ public class Marching {
 		}
 	}
 
-	public synchronized void letOrangeInParade() {
-		//Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number Enforce by thread ID?
-		
-		synchronized (paradeGroups) {								//subtring the threadname?
-			while (true) {
-				System.out.println(Thread.currentThread().getName());
+	public synchronized int letOrangeInParade() {
+		// Object convey = paradeGroups.get(paradersEntered);//cant enforce order they
+		// get number Enforce by thread ID?
 
-				orangeStudents++;
-				paradersEntered++;
-				// System.out.println("f");
-				// convey =
-				if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-					System.out.println("test");
-				// System.out.println("hhhhhhhhhh");
-				if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
-												// green and orange!!!
-				{
-					groupFormed = true;
-					// paradeGroupsFormed++;
-					wakeClock();
-				}
-				//convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
-				//waiting(orangeStudents);
-				try {
-					paradeGroups.get(orangeStudents).wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+		//synchronized (paradeGroups) { // subtring the threadname?
+		/*
+		 * while (true) {
+		 * 
+		 * // convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
+		 * // waiting(orangeStudents); try { paradeGroups.get(orangeStudents).wait(); }
+		 * catch (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } break; }
+		 */
+			System.out.println(Thread.currentThread().getName());
+
+			orangeStudents++;
+			paradersEntered++;
+			// System.out.println("f");
+			// convey =
+			if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
+				System.out.println("test");
+			// System.out.println("hhhhhhhhhh");
+			if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
+											// green and orange!!!
+			{
+				groupFormed = true;
+				// paradeGroupsFormed++;
+				wakeClock();
 			}
+			return orangeStudents;
+			
+			
 
-		}
+		//}
 	}
 
-	public synchronized void letGreenInParade() {
-		//Object convey = paradeGroups.get(greenParadeGroups);
-		synchronized (paradeGroups) {
-		System.out.println("jjjjjjjjjjjjjjjj");
-			while (true) {
-				// System.out.println("there");
-				System.out.println(Thread.currentThread().getName());
-				greenStudents++;
-				paradersEntered++;
-				if (greenStudents % 2 == 0) {
-					greenParadeGroups++;
-				}
-				if (paradersEntered % 3 == 0) {
-					groupFormed = true;
-					// paradeGroupsFormed++;
-					wakeClock();
-				}
-				//convey.wait();
-				//waiting(greenParadeGroups);
-				try {
-					paradeGroups.get(greenParadeGroups).wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
-
-			}
-
+	public synchronized int letGreenInParade() {
+		// Object convey = paradeGroups.get(greenParadeGroups);
+		// synchronized (paradeGroups) {
+		/*
+		 * System.out.println("jjjjjjjjjjjjjjjj"); while (true) { //
+		 * System.out.println("there");
+		 * 
+		 * 
+		 * // convey.wait(); // waiting(greenParadeGroups); try {
+		 * paradeGroups.get(greenParadeGroups).wait(); } catch (InterruptedException e)
+		 * { // TODO Auto-generated catch block e.printStackTrace(); } break;
+		 * 
+		 * }
+		 */
+		System.out.println(Thread.currentThread().getName());
+		greenStudents++;
+		paradersEntered++;
+		if (greenStudents+1 % 2 == 0) {
+			greenParadeGroups++;
 		}
+		if (paradersEntered % 3 == 0) {
+			groupFormed = true;
+			// paradeGroupsFormed++;
+			wakeClock();
+		}
+		return greenParadeGroups;
+
+		// }
 	}
 
 	public void anotherParade() {
@@ -199,19 +198,22 @@ public class Marching {
 			convey.notifyAll();
 		}
 	}
-	
-	public void waiting (int paradeWaitNumber) {
+
+	public void waiting(int paradeWaitNumber) {
 		Object convey = paradeGroups.get(paradeWaitNumber);
-		synchronized (convey){
-			try {
-				convey.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		synchronized (convey) {
+			while (true) {
+				try {
+					convey.wait();
+					break;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	public synchronized int getGreenpadeGroup() {
 		return greenParadeGroups;
 	}

@@ -15,8 +15,8 @@ public class GreenStudent implements Runnable {
 		// TODO Auto-generated method stub
 		setName(name);
 		// System.out.println(Thread.currentThread().getName());
-		march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
-
+		int waiting = march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
+		march.waiting(waiting);
 		System.out.println("well");
 		// march.exitParade();
 	}
