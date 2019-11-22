@@ -140,7 +140,7 @@ public class Marching {
 		System.out.println(Thread.currentThread().getName());
 		greenStudents++;
 		paradersEntered++;
-		if (greenStudents+1 % 2 == 0) {
+		if (greenStudents % 2 != 0) {
 			greenParadeGroups++;
 		}
 		if (paradersEntered % 3 == 0) {
@@ -148,6 +148,7 @@ public class Marching {
 			// paradeGroupsFormed++;
 			wakeClock();
 		}
+		System.out.println(greenParadeGroups);
 		return greenParadeGroups;
 
 		// }
