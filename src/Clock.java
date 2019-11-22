@@ -35,8 +35,9 @@ public class Clock implements Runnable{
 		
 		try {
 			Thread.sleep(1500);
-			msg("It is 12:15PM. The First Show has Started");
 			
+			msg("It is 12:15PM. The First Show has Started");
+			//ClockNotifier.wait();
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
 		}

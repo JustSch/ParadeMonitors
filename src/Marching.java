@@ -10,6 +10,7 @@ public class Marching {
 	private int greenStudents = 0;// has two
 	private int orangeStudents = 0; // has one
 	private boolean hasOrange = false;
+	private static boolean groupFormed = false;
 	private static boolean paradeFilled;
 	private static int paraders;
 	private static int paradersEntered = 0;
@@ -98,7 +99,7 @@ public class Marching {
 				// convey =
 				if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
 					System.out.println("test");
-				System.out.println("hhhhhhhhhh");
+				//System.out.println("hhhhhhhhhh");
 				convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
 				break;
 			} catch (InterruptedException e) {
@@ -152,6 +153,14 @@ public class Marching {
 
 	public static void setClockNotifier(Object clockNotifier) {
 		ClockNotifier = clockNotifier;
+	}
+
+	public boolean isGroupFormed() {
+		return groupFormed;
+	}
+
+	public void setGroupFormed(boolean groupFormed) {
+		this.groupFormed = groupFormed;
 	}
 
 }
