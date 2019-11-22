@@ -38,7 +38,7 @@ public class Parade extends Object {
 		Random random = new Random();
 		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
 
-		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(),numOrange)); // Makes Clock Thread
+		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(),numOrange,march)); // Makes Clock Thread
 
 		clockThread.start();
 
@@ -70,7 +70,7 @@ public class Parade extends Object {
 		 * greenStudente.start();
 		 */
 
-		Thread staffMember = new Thread(new StaffMember());
+		
 
 	}
 

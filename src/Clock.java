@@ -6,16 +6,17 @@ public class Clock implements Runnable{
 	public String clockName;
 	public Object ClockNotifier = new Object();
 	public int total;
+	public Marching march;
+	public static Object StaffNotifier = new Object();
 	
 	public Clock() {
 
 	}
-	public Clock(String clockName,Object ClockNotifier, int total) { // Constructor Used To Set Thread Name
-
-		setName(clockName);
+	public Clock(String clockName,Object ClockNotifier, int total, Marching march) { // Constructor Used To Set Thread Name	
 		this.clockName = clockName;
 		this.ClockNotifier=ClockNotifier;
 		this.total = total;
+		this.march = march;
 	}
 
 	public final void setName(String clockNameToSet) {
@@ -32,16 +33,19 @@ public class Clock implements Runnable{
 	 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
 	 }
 	public void run(){
+		setName(clockName);
 		
-		msg("It is 12:00PM The Parade Has Started");
+		Thread staffMember = new Thread(new StaffMember(march,"Staff Member",StaffNotifier));
+		staffMember.start();
+		msg("It is 11:00AM The Parade Has Started");
 		
 		try {
 			waiting();
 			
 			Thread.sleep(1500);
 			releaseGroups();
-			
-			msg("It is 12:15PM. The First Show has Started");
+			march.releasing(StaffNotifier);
+			msg("It is 11:15AM. The First Show has Started");
 			//ClockNotifier.wait();
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");

@@ -16,7 +16,7 @@ public class OrangeStudent implements Runnable {
 		setName(name);
 		// System.out.println(Thread.currentThread().getName());
 		int waiting = march.letOrangeInParade();
-		march.waiting(waiting);
+		march.paradeWaiting(waiting);
 
 		System.out.println("ddddd");
 		// march.exitParade();

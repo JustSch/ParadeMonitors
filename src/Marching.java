@@ -7,6 +7,8 @@ public class Marching {
 	// private Vector greenInParade = new Vector(); //make convey object too
 	// private Vector redInParade = new Vector();
 	private static Vector<Object> paradeGroups = new Vector<Object>();
+	private static Vector<Object> puppetShow = new Vector<Object>();
+	private static int seats =0;
 	private int greenStudents = 0;// has two
 	private int orangeStudents = -1; // has one
 	private boolean hasOrange = false;
@@ -201,7 +203,7 @@ public class Marching {
 		}
 	}
 
-	public void waiting(int paradeWaitNumber) {
+	public void paradeWaiting(int paradeWaitNumber) {
 		Object convey = paradeGroups.get(paradeWaitNumber);
 		synchronized (convey) {
 			while (true) {
@@ -213,6 +215,24 @@ public class Marching {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+	
+	public void waiting(Object Notifier) {
+		Object convey = Notifier;
+		synchronized(convey) {
+			try {
+				convey.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	public void releasing(Object Notifier) {
+		Object convey = Notifier;
+		synchronized(convey) {
+			convey.notify();
 		}
 	}
 
