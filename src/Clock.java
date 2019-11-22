@@ -8,15 +8,17 @@ public class Clock implements Runnable{
 	public int total;
 	public Marching march;
 	public static Object StaffNotifier = new Object();
+	public int numSeat;
 	
 	public Clock() {
 
 	}
-	public Clock(String clockName,Object ClockNotifier, int total, Marching march) { // Constructor Used To Set Thread Name	
+	public Clock(String clockName,Object ClockNotifier, int total, Marching march, int numSeat) { // Constructor Used To Set Thread Name	
 		this.clockName = clockName;
 		this.ClockNotifier=ClockNotifier;
 		this.total = total;
 		this.march = march;
+		this.numSeat = numSeat;
 	}
 
 	public final void setName(String clockNameToSet) {
@@ -34,7 +36,7 @@ public class Clock implements Runnable{
 	 }
 	public void run(){
 		setName(clockName);
-		
+		march.readyPuppetShow();
 		Thread staffMember = new Thread(new StaffMember(march,"Staff Member",StaffNotifier));
 		staffMember.start();
 		msg("It is 11:00AM The Parade Has Started");

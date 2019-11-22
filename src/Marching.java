@@ -35,6 +35,12 @@ public class Marching {
 		}
 
 	}
+	public void readyPuppetShow () {
+		for (int i =0; i<6;i++) {
+			Object convey = new Object();
+			puppetShow.add(convey);
+		}
+	}
 
 	public synchronized void Age() {
 		long time = System.currentTimeMillis();
