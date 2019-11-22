@@ -5,15 +5,17 @@ public class Clock implements Runnable{
 	public static long time = System.currentTimeMillis();
 	public String clockName;
 	public Object ClockNotifier = new Object();
+	public int total;
 	
 	public Clock() {
 
 	}
-	public Clock(String clockName,Object ClockNotifier) { // Constructor Used To Set Thread Name
+	public Clock(String clockName,Object ClockNotifier, int total) { // Constructor Used To Set Thread Name
 
 		setName(clockName);
 		this.clockName = clockName;
 		this.ClockNotifier=ClockNotifier;
+		this.total = total;
 	}
 
 	public final void setName(String clockNameToSet) {
@@ -37,7 +39,8 @@ public class Clock implements Runnable{
 			waiting();
 			
 			Thread.sleep(1500);
-			Marching.releaseParadeGroups(0);
+			releaseGroups();
+			
 			msg("It is 12:15PM. The First Show has Started");
 			//ClockNotifier.wait();
 		} catch (InterruptedException e) {
@@ -60,6 +63,12 @@ public class Clock implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	public void releaseGroups() {
+		for (int i =0; i< total; i++) {
+			Marching.releaseParadeGroups(i);
 		}
 	}
 
