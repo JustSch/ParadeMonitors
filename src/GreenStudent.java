@@ -18,6 +18,7 @@ public class GreenStudent implements Runnable {
 		int waiting = march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
 		march.paradeWaiting(waiting);
 		System.out.println("well");
+		
 		// march.exitParade();
 	}
 

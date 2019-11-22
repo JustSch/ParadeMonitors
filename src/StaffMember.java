@@ -17,9 +17,10 @@ public class StaffMember implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		setName(name);
-		msg("The Puppet Show Will Start Soon");
+		msg("The Puppet Show Will Start Soon: Opening Tent");
 		march.waiting(StaffNotifier);
 		
+		msg("The Puppet Show Is Starting: Closing Tent");
 	}
 	
 	
