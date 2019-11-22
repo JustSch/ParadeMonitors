@@ -89,7 +89,7 @@ public class Marching {
 
 	public void letOrangeInParade() {
 		Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number Enforce by thread ID?
-		synchronized (convey) {
+		synchronized (convey) {								//subtring the threadname?
 			while (true) {
 				try {
 					System.out.println(Thread.currentThread().getName());
