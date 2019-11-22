@@ -34,6 +34,8 @@ public class Clock implements Runnable{
 		msg("It is 12:00PM The Parade Has Started");
 		
 		try {
+			waiting();
+			Marching.releaseParadeGroups();
 			Thread.sleep(1500);
 			
 			msg("It is 12:15PM. The First Show has Started");
@@ -41,12 +43,24 @@ public class Clock implements Runnable{
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
 		}
-		while(true) {
-			if (Marching.isParadeFilled())break;//Replace with wait in its own object then is signalled when filled? yes use static one
+		/*
+		 * while(true) { if (Marching.isParadeFilled())break;//Replace with wait in its
+		 * own object then is signalled when filled? yes use static one }
+		 */
+		
+		
+		
+	}
+	
+	public void waiting() {
+		synchronized(ClockNotifier) {
+			try {
+				ClockNotifier.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-		
-		
 	}
 
 }

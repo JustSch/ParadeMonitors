@@ -100,6 +100,11 @@ public class Marching {
 				if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
 					System.out.println("test");
 				//System.out.println("hhhhhhhhhh");
+				if (paradersEntered%3==0)
+				{
+					groupFormed = true;
+					wakeClock();
+				}
 				convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
 				break;
 			} catch (InterruptedException e) {
@@ -120,8 +125,14 @@ public class Marching {
 				//System.out.println("there");
 				System.out.println(Thread.currentThread().getName());
 				greenStudents++;
+				paradersEntered++;
 				if (greenStudents %2==0) {
 					greenParaders++;
+				}
+				if (paradersEntered%3==0)
+				{
+					groupFormed = true;
+					wakeClock();
 				}
 				convey.wait();
 				break;
@@ -161,6 +172,23 @@ public class Marching {
 
 	public void setGroupFormed(boolean groupFormed) {
 		this.groupFormed = groupFormed;
+	}
+	
+	public static Vector<Object> getParadeGroups() {
+		return paradeGroups;
+	}
+	
+	public void wakeClock() {
+		Object clockNotifier = ClockNotifier;
+		synchronized(clockNotifier) {
+			ClockNotifier.notify();
+		}
+	}
+	public static void releaseParadeGroups() {
+		Object convey = paradeGroups.get(0);
+		synchronized(convey) {
+			convey.notifyAll();
+		}
 	}
 
 }

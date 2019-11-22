@@ -15,8 +15,8 @@ public class GreenStudent implements Runnable {
 		//System.out.println(Thread.currentThread().getName());
 		march.letGreenInParade();
 		
-		
-		march.exitParade();
+		System.out.println("well");
+		//march.exitParade();
 	}
 	
 	public final void setName(String name) {

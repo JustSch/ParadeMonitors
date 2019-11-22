@@ -18,8 +18,8 @@ public class OrangeStudent implements Runnable {
 		//System.out.println(Thread.currentThread().getName());
 		march.letOrangeInParade();
 		
-		
-		march.exitParade();
+		System.out.println("ddddd");
+		//march.exitParade();
 		
 		//enterPuppetShow/More parades
 		
