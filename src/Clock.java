@@ -35,7 +35,7 @@ public class Clock implements Runnable{
 		
 		try {
 			waiting();
-			Marching.releaseParadeGroups();
+			Marching.releaseParadeGroups(0);
 			Thread.sleep(1500);
 			
 			msg("It is 12:15PM. The First Show has Started");

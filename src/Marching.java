@@ -100,7 +100,7 @@ public class Marching {
 				if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
 					System.out.println("test");
 				//System.out.println("hhhhhhhhhh");
-				if (paradersEntered%3==0)
+				if (paradersEntered%3==0) //no gurantee that 3 who entered are in the right order must count green and orange!!!
 				{
 					groupFormed = true;
 					wakeClock();
@@ -184,8 +184,8 @@ public class Marching {
 			ClockNotifier.notify();
 		}
 	}
-	public static void releaseParadeGroups() {
-		Object convey = paradeGroups.get(0);
+	public static void releaseParadeGroups(int groupNumber) {
+		Object convey = paradeGroups.get(groupNumber);
 		synchronized(convey) {
 			convey.notifyAll();
 		}
