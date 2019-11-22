@@ -7,7 +7,7 @@ public class Marching {
 	// private Vector greenInParade = new Vector(); //make convey object too
 	// private Vector redInParade = new Vector();
 	private static Vector<Object> paradeGroups = new Vector<Object>();
-	private int greenStudents = 0;// has two
+	private int greenStudents = -1;// has two
 	private int orangeStudents = 0; // has one
 	private boolean hasOrange = false;
 	private static boolean groupFormed = false;
@@ -87,62 +87,67 @@ public class Marching {
 		}
 	}
 
-	public void letOrangeInParade() {
-		Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number Enforce by thread ID?
-		synchronized (convey) {								//subtring the threadname?
+	public synchronized void letOrangeInParade() {
+		//Object convey = paradeGroups.get(paradersEntered);//cant enforce order they get number Enforce by thread ID?
+		
+		synchronized (paradeGroups) {								//subtring the threadname?
 			while (true) {
-				try {
-					System.out.println(Thread.currentThread().getName());
+				System.out.println(Thread.currentThread().getName());
 
-					orangeStudents++;
-					paradersEntered++;
-					// System.out.println("f");
-					// convey =
-					if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-						System.out.println("test");
-					// System.out.println("hhhhhhhhhh");
-					if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
-													// green and orange!!!
-					{
-						groupFormed = true;
-						// paradeGroupsFormed++;
-						wakeClock();
-					}
-					convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
-					break;
+				orangeStudents++;
+				paradersEntered++;
+				// System.out.println("f");
+				// convey =
+				if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
+					System.out.println("test");
+				// System.out.println("hhhhhhhhhh");
+				if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
+												// green and orange!!!
+				{
+					groupFormed = true;
+					// paradeGroupsFormed++;
+					wakeClock();
+				}
+				//convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
+				//waiting(orangeStudents);
+				try {
+					paradeGroups.get(orangeStudents).wait();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				break;
 			}
 
 		}
 	}
 
-	public void letGreenInParade() {
-		Object convey = paradeGroups.get(greenParadeGroups);
-		synchronized (convey) {
-
+	public synchronized void letGreenInParade() {
+		//Object convey = paradeGroups.get(greenParadeGroups);
+		synchronized (paradeGroups) {
+		System.out.println("jjjjjjjjjjjjjjjj");
 			while (true) {
+				// System.out.println("there");
+				System.out.println(Thread.currentThread().getName());
+				greenStudents++;
+				paradersEntered++;
+				if (greenStudents % 2 == 0) {
+					greenParadeGroups++;
+				}
+				if (paradersEntered % 3 == 0) {
+					groupFormed = true;
+					// paradeGroupsFormed++;
+					wakeClock();
+				}
+				//convey.wait();
+				//waiting(greenParadeGroups);
 				try {
-					// System.out.println("there");
-					System.out.println(Thread.currentThread().getName());
-					greenStudents++;
-					paradersEntered++;
-					if (greenStudents+1 % 2 == 0) {
-						greenParadeGroups++;
-					}
-					if (paradersEntered % 3 == 0) {
-						groupFormed = true;
-						// paradeGroupsFormed++;
-						wakeClock();
-					}
-					convey.wait();
-					break;
+					paradeGroups.get(greenParadeGroups).wait();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				break;
 
 			}
 
@@ -192,6 +197,18 @@ public class Marching {
 		Object convey = paradeGroups.get(groupNumber);
 		synchronized (convey) {
 			convey.notifyAll();
+		}
+	}
+	
+	public void waiting (int paradeWaitNumber) {
+		Object convey = paradeGroups.get(paradeWaitNumber);
+		synchronized (convey){
+			try {
+				convey.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
