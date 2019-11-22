@@ -113,14 +113,15 @@ public class Marching {
 	public void letGreenInParade() {
 		Object convey = paradeGroups.get(greenParaders);
 		synchronized (convey) {
-		if (greenStudents %2==0) {
-			greenParaders++;
-		}
 		
 		while (true) {
 			try {
-				System.out.println("there");
+				//System.out.println("there");
+				System.out.println(Thread.currentThread().getName());
 				greenStudents++;
+				if (greenStudents %2==0) {
+					greenParaders++;
+				}
 				convey.wait();
 				break;
 			} catch (InterruptedException e) {

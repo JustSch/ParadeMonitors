@@ -42,27 +42,32 @@ public class Parade extends Object {
 
 		clockThread.start();
 
-		/*
-		 * for (int i = 0; i < numOrange; i++) { //Creates Each Thread With Array Used
-		 * Earlier Thread orangeStudent = new Thread(new
-		 * OrangeStudent(march,"orange "+i)); orangeList.add(orangeStudent); }
-		 * 
-		 * for (Thread orange :orangeList) orange.start(); // starts each thread in the
-		 * visitor Array using For Each Loop
-		 * 
-		 * for (int i = 0; i < numGreen; i++) { //Creates Each Thread With Array Used
-		 * Earlier Thread greenStudent = new Thread(new GreenStudent(march,"green "+i));
-		 * orangeList.add(greenStudent); }
-		 * 
-		 * for (Thread green :greenList) green.start(); // starts each thread in the
-		 * visitor Array using For Each Loop
-		 */		
+		
+		  for (int i = 0; i < numOrange; i++) { //Creates Each Thread With Array Used
+		  Thread orangeStudent = new Thread(new
+		  OrangeStudent(march,"orange "+i)); 
+		  orangeList.add(orangeStudent); }
+		  
+		  for (Thread orange :orangeList) orange.start(); // starts each thread in the
+		  //visitor Array using For Each Loop
+		  
+		  for (int i = 0; i < numGreen; i++) { //Creates Each Thread With Array Used
+		  Thread greenStudent = new Thread(new GreenStudent(march,"green "+i));
+		  greenList.add(greenStudent); }
+		  
+		  for (Thread green :greenList) green.start(); // starts each thread in the
+		  //visitor Array using For Each Loop
+		 		
 		
 		//Use these to test but then uncomment above to use for all threads!!!
-		Thread orangeStudent = new Thread(new OrangeStudent(march,"orange"));
-		orangeStudent.start();
-		Thread greenStudent = new Thread(new GreenStudent(march,"green"));
-		greenStudent.start();
+		/*
+		 * Thread orangeStudent = new Thread(new OrangeStudent(march,"orange"));
+		 * orangeStudent.start(); Thread greenStudent = new Thread(new
+		 * GreenStudent(march,"green")); greenStudent.start();
+		 * 
+		 * Thread greenStudente = new Thread(new GreenStudent(march,"green"));
+		 * greenStudente.start();
+		 */
 		
 		Thread staffMember = new Thread(new StaffMember());
 
