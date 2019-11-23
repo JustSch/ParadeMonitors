@@ -198,7 +198,7 @@ public class Marching {
 		}
 	}
 
-	public int letInPuppetShow() {
+	public int letInPuppetShowEntance() {
 		Object convey = new Object();
 		synchronized (convey) {
 			if (cantEnter(convey)) {
@@ -214,7 +214,7 @@ public class Marching {
 				}
 
 			}
-			seats++;
+			//addSeats();
 			return seats;
 		}
 		 
@@ -223,7 +223,7 @@ public class Marching {
 
 	public synchronized boolean cantEnter(Object convey) {
 		Boolean status;
-
+		msg(String.valueOf(seats)+'m');
 		if (seats >= 6 || seatsFilled) {
 			puppetShowWait.add(convey);
 			status = true;
@@ -244,12 +244,23 @@ public class Marching {
 		return seats;
 
 	}
+	
+	public void releaseStuff() {
+		//Object o = new Objec	t();
+		resetSeats();
+		for (Object o : puppetShow) {
+			synchronized (o) {
+				o.notify();
+			}
+		}
+	}
 
 	public void sitDown(int numSeat,int seat) {// reached when can go in
 		Object convey = new Object();
 		synchronized (convey) {
 			try {
 				puppetShow.add(seat, convey);
+				addSeats();
 				if (seats == numSeat) {
 					msg(String.valueOf(numSeat)+'s');
 					msg(String.valueOf(seats));
