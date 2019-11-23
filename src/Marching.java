@@ -221,7 +221,7 @@ public class Marching {
 		}
 	}
 
-	public void letInPuppetShow() {
+	public int letInPuppetShow() {
 		Object convey = new Object();
 		synchronized (convey) {
 			if (cantEnter(convey)) {
@@ -237,7 +237,10 @@ public class Marching {
 				}
 
 			}
+			seats++;
+			return seats;
 		}
+		 
 
 	}
 
@@ -249,7 +252,7 @@ public class Marching {
 			status = true;
 		} else
 			status = false;
-		seatsFilled = false;
+		//seatsFilled = false;
 
 		return status;
 
@@ -270,7 +273,6 @@ public class Marching {
 		synchronized (convey) {
 			try {
 				puppetShow.add(seats, convey);
-				seats++;
 				if (seats == numSeat) {
 					seatsFilled = true;
 
