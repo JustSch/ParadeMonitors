@@ -21,6 +21,10 @@ public class StaffMember implements Runnable {
 		march.waiting(StaffNotifier);
 		//march.
 		msg("The Puppet Show Is Starting: Closing Tent");
+		
+		
+		msg("The Puppet Show Has Ended: 6 More Students May Enter");
+		
 	}
 	
 	

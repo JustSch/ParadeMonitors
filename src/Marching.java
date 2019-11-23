@@ -233,9 +233,9 @@ public class Marching {
 	}
 
 	public synchronized boolean cantEnter(Object convey) {
-		Boolean status = false;
-
-		if (seats >= 6 && seatsFilled) {
+		Boolean status;
+		
+		if (seats == 6 && seatsFilled) {
 			puppetShowWait.add(convey);
 			status = true;
 		} else
@@ -245,6 +245,7 @@ public class Marching {
 		return status;
 
 	}
+	
 
 	public synchronized void resetSeats() {
 		seats = 0;
@@ -280,12 +281,14 @@ public class Marching {
 	public void puppetRelease (int seatNumber) {
 		Object convey = puppetShow.get(seatNumber);
 		synchronized(convey) {
-			try {
-				convey.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			convey.notify();
+		}
+	}
+	
+	public static void releasingFromPuppetWaiting(int waitNumber) {
+		Object convey = puppetShowWait.get(waitNumber);
+		synchronized (convey) {
+			convey.notify();
 		}
 	}
 
