@@ -42,8 +42,9 @@ public class Clock implements Runnable{
 			
 			Thread.sleep(1500); 
 			releaseGroups();
-			march.releasing(StaffNotifier);
+			
 			msg("It is 11:15AM. The First Show has Started");
+			march.releasing(StaffNotifier);
 			//ClockNotifier.wait();
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
