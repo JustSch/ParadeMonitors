@@ -75,7 +75,7 @@ public class Marching {
 				paradeGroupsFormed++;
 			}
 			paradersEntered++;// Use this to figure out which convey is passed
-			System.out.println(Thread.currentThread().getName().substring(0, 1));
+			//System.out.println(Thread.currentThread().getName().substring(0, 1));
 			if (Thread.currentThread().getName().substring(0, 1).contentEquals("o")) {
 				// hasOrange = true;
 				// Critical Section!!
@@ -100,7 +100,7 @@ public class Marching {
 
 	public synchronized int letOrangeInParade() {
 		
-		System.out.println(Thread.currentThread().getName());
+		//System.out.println(Thread.currentThread().getName());
 
 		orangeStudents++;
 		paradersEntered++;
@@ -123,7 +123,7 @@ public class Marching {
 
 	public synchronized int letGreenInParade() {
 		
-		System.out.println(Thread.currentThread().getName());
+		//System.out.println(Thread.currentThread().getName());
 
 		if (greenStudents % 2 == 0 && greenStudents != 0) {
 			greenParadeGroups++;
@@ -135,7 +135,7 @@ public class Marching {
 			// paradeGroupsFormed++;
 			wakeClock();
 		}
-		System.out.println(greenParadeGroups);
+		//System.out.println(greenParadeGroups);
 		return greenParadeGroups;
 
 		// }

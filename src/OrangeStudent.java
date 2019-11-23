@@ -2,6 +2,7 @@
 public class OrangeStudent implements Runnable {
 	private Marching march = null;
 	public String name;
+	public static long time = System.currentTimeMillis();
 
 	public OrangeStudent(Marching march, String name) {
 		// TODO Auto-generated constructor stub
@@ -15,10 +16,13 @@ public class OrangeStudent implements Runnable {
 		// TODO Auto-generated method stub
 		setName(name);
 		// System.out.println(Thread.currentThread().getName());
+		
 		int waiting = march.letOrangeInParade();
+		msg("I have entered the parade");
 		march.paradeWaiting(waiting);
+		msg("I have exited the parade");
 
-		System.out.println("ddddd");
+		//System.out.println("ddddd");
 		// march.exitParade();
 
 		// enterPuppetShow/More parades
@@ -30,5 +34,8 @@ public class OrangeStudent implements Runnable {
 		Thread.currentThread().setName(name); // Sets name of Thread
 
 	}
+	public void msg(String m) {
+		 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
+		 }
 
 }

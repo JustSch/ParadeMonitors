@@ -19,7 +19,7 @@ public class StaffMember implements Runnable {
 		setName(name);
 		msg("The Puppet Show Will Start Soon: Opening Tent");
 		march.waiting(StaffNotifier);
-		
+		//march.
 		msg("The Puppet Show Is Starting: Closing Tent");
 	}
 	

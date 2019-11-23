@@ -4,6 +4,7 @@ public class GreenStudent implements Runnable {
 	private Marching march = null;
 	public String name;
 	public Object Convey;
+	public static long time = System.currentTimeMillis();
 
 	public GreenStudent(Marching march, String name) {
 		this.march = march;
@@ -17,9 +18,11 @@ public class GreenStudent implements Runnable {
 		setName(name);
 		// System.out.println(Thread.currentThread().getName());
 		int waiting = march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
+		msg("I have entered the parade");
 		march.paradeWaiting(waiting);
-		System.out.println("well");
-		march.letInPuppetShow();
+		msg("I have exited the parade");
+		;
+	//	march.letInPuppetShow();
 		//march.sitDown();
 		
 		//each has own convey for not in puppet show.
@@ -36,5 +39,8 @@ public class GreenStudent implements Runnable {
 		Thread.currentThread().setName(name); // Sets name of Thread
 
 	}
+	public void msg(String m) {
+		 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
+		 }
 
 }
