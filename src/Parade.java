@@ -4,7 +4,7 @@ import java.util.Vector;
 
 //use two types of convey objects one for parade and one for show
 public class Parade extends Object {
-	//private Vector shows = new Vector(); // make convey object too
+	// private Vector shows = new Vector(); // make convey object too
 	// Vectors keep track of who cant go in. the rest wait on object
 	// Vectors are entry section?
 	// with these defaults can create 7 groups
@@ -21,15 +21,15 @@ public class Parade extends Object {
 
 	// Look at how Readers Know they are done with CS!!!!!!
 	// Set These in Marching using get/set!!!!!!!!
-	
+
 	// private int ParadeNumber;
 
 	// Don't forget Age() method!!!
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		//Need To be able to pass these in!!!!!
+
+		// Need To be able to pass these in!!!!!
 		int numGreen = 14;
 		int numOrange = 7;
 		int numSeat = 6; // tent capacity
@@ -41,12 +41,14 @@ public class Parade extends Object {
 		Random random = new Random();
 		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
 
-		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(),numOrange,march,numSeat)); // Makes Clock Thread
+		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(), numOrange, march, numSeat)); // Makes
+																														// Clock
+																														// Thread
 
 		clockThread.start();
 
 		for (int i = 0; i < numOrange; i++) { // Creates Each Thread With Array Used
-			Thread orangeStudent = new Thread(new OrangeStudent(march, "orange " + i,numSeat));
+			Thread orangeStudent = new Thread(new OrangeStudent(march, "orange " + i, numSeat));
 			orangeList.add(orangeStudent);
 		}
 
@@ -55,7 +57,7 @@ public class Parade extends Object {
 		// visitor Array using For Each Loop
 
 		for (int j = 0; j < numGreen; j++) { // Creates Each Thread With Array Used
-			Thread greenStudent = new Thread(new GreenStudent(march, "green " + j,numSeat));
+			Thread greenStudent = new Thread(new GreenStudent(march, "green " + j, numSeat));
 			greenList.add(greenStudent);
 		}
 
@@ -72,8 +74,6 @@ public class Parade extends Object {
 		 * Thread greenStudente = new Thread(new GreenStudent(march,"green"));
 		 * greenStudente.start();
 		 */
-
-		
 
 	}
 

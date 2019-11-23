@@ -23,8 +23,8 @@ public class Marching {
 	private static Object ClockNotifier = new Object(); // No things can keep being added to vector!!!
 	private static int greenParadeGroups = 0;
 
-
 	public static long time = System.currentTimeMillis();
+
 	public Marching() {
 
 	}
@@ -64,12 +64,12 @@ public class Marching {
 		convey = paradeGroups.get(paradersEntered);// needs convey before synch!!!!!
 		paradersEntered++; // need to add one before for mod to work
 		synchronized (convey) { // replace with
-		
+
 			if (paradersEntered % 3 == 0) {
 				paradeGroupsFormed++;
 			}
 			paradersEntered++;// Use this to figure out which convey is passed
-			//System.out.println(Thread.currentThread().getName().substring(0, 1));
+			// System.out.println(Thread.currentThread().getName().substring(0, 1));
 			if (Thread.currentThread().getName().substring(0, 1).contentEquals("o")) {
 				// hasOrange = true;
 				// Critical Section!!
@@ -93,8 +93,8 @@ public class Marching {
 	}
 
 	public synchronized int letOrangeInParade() {
-		
-		//System.out.println(Thread.currentThread().getName());
+
+		// System.out.println(Thread.currentThread().getName());
 
 		orangeStudents++;
 		paradersEntered++;
@@ -116,8 +116,8 @@ public class Marching {
 	}
 
 	public synchronized int letGreenInParade() {
-		
-		//System.out.println(Thread.currentThread().getName());
+
+		// System.out.println(Thread.currentThread().getName());
 
 		if (greenStudents % 2 == 0 && greenStudents != 0) {
 			greenParadeGroups++;
@@ -129,7 +129,7 @@ public class Marching {
 			// paradeGroupsFormed++;
 			wakeClock();
 		}
-		//System.out.println(greenParadeGroups);
+		// System.out.println(greenParadeGroups);
 		return greenParadeGroups;
 
 		// }
@@ -202,15 +202,15 @@ public class Marching {
 	public void waiting(Object Notifier) {
 		Object convey = Notifier;
 		synchronized (convey) {
-			while(true) {
-			try {
-				convey.wait();
-				break;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			while (true) {
+				try {
+					convey.wait();
+					break;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		}
 		}
 	}
 
@@ -227,6 +227,7 @@ public class Marching {
 			if (cantEnter(convey)) {
 				while (true) {
 					try {
+						msg("I am waiting to get to see the puppet show");
 						convey.wait();
 						break;
 					} catch (InterruptedException e) {
@@ -242,7 +243,7 @@ public class Marching {
 
 	public synchronized boolean cantEnter(Object convey) {
 		Boolean status;
-		
+
 		if (seats >= 6 && seatsFilled) {
 			puppetShowWait.add(convey);
 			status = true;
@@ -253,19 +254,18 @@ public class Marching {
 		return status;
 
 	}
-	
 
 	public synchronized void resetSeats() {
 		seats = 0;
 	}
-	
+
 	public synchronized int addSeats() {
 		seats++;
 		return seats;
-		
+
 	}
 
-	public void sitDown(int numSeat) {//reached when can go in
+	public void sitDown(int numSeat) {// reached when can go in
 		Object convey = new Object();
 		synchronized (convey) {
 			try {
@@ -273,8 +273,9 @@ public class Marching {
 				seats++;
 				if (seats == numSeat) {
 					seatsFilled = true;
-					
+
 				}
+				msg("I am watching the puppet show");
 				convey.wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -286,24 +287,26 @@ public class Marching {
 	public synchronized int getGreenpadeGroup() {
 		return greenParadeGroups;
 	}
-	public void puppetRelease (int seatNumber) {
+
+	public void puppetRelease(int seatNumber) {
 		Object convey = puppetShow.get(seatNumber);
-		synchronized(convey) {
+		synchronized (convey) {
 			convey.notify();
 		}
 	}
-	
+
 	public static void releasingFromPuppetWaiting(int waitNumber) {
 		Object convey = puppetShowWait.get(waitNumber);
 		synchronized (convey) {
 			convey.notify();
 		}
 	}
-	
+
 	public synchronized static void msg(String m) {
-		 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
-		 }
-	
+		System.out.println(
+				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + m);
+	}
+
 	public synchronized void walking() {
 		msg("I am Marching in the Parade");
 	}

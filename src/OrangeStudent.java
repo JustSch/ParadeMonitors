@@ -18,15 +18,16 @@ public class OrangeStudent implements Runnable {
 		// TODO Auto-generated method stub
 		setName(name);
 		// System.out.println(Thread.currentThread().getName());
-		
+
 		int waiting = march.letOrangeInParade();
-		
+
 		march.paradeWaiting(waiting);
-		//msg("I have entered the parade");
+		// msg("I have entered the parade");
 		march.walking();
 		msg("I have exited the parade");
-
-		//System.out.println("ddddd");
+		march.letInPuppetShow();
+		march.sitDown(waiting);
+		// System.out.println("ddddd");
 		// march.exitParade();
 
 		// enterPuppetShow/More parades
@@ -38,8 +39,10 @@ public class OrangeStudent implements Runnable {
 		Thread.currentThread().setName(name); // Sets name of Thread
 
 	}
+
 	public void msg(String m) {
-		 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
-		 }
+		System.out.println(
+				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + m);
+	}
 
 }
