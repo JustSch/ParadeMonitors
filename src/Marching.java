@@ -197,12 +197,15 @@ public class Marching {
 	public void waiting(Object Notifier) {
 		Object convey = Notifier;
 		synchronized (convey) {
+			while(true) {
 			try {
 				convey.wait();
+				break;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
 		}
 	}
 
