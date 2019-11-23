@@ -62,15 +62,7 @@ public class Marching {
 		convey = paradeGroups.get(paradersEntered);// needs convey before synch!!!!!
 		paradersEntered++; // need to add one before for mod to work
 		synchronized (convey) { // replace with
-			// synchronized(this) { ?
-			// Does this need to be passed in or it just chooses from vector?
-
-			/*
-			 * if (!isParadeFilled() && paradersEntered!=paraders) {
-			 * 
-			 * paraders++; } else setParadeFilled(true)
-			 */;
-			// Have start at 1?
+		
 			if (paradersEntered % 3 == 0) {
 				paradeGroupsFormed++;
 			}
@@ -244,7 +236,7 @@ public class Marching {
 		Boolean status = false;
 
 		if (seats >= 6 && seatsFilled) {
-			puppetShow.add(convey);
+			puppetShowWait.add(convey);
 			status = true;
 		} else
 			status = false;
@@ -264,10 +256,16 @@ public class Marching {
 		
 	}
 
-	public void sitDown(int seatNumber) {
-		Object convey = puppetShowWait.get(seatNumber);
+	public void sitDown(int numSeat) {
+		Object convey = new Object();
 		synchronized (convey) {
 			try {
+				puppetShow.add(seats, convey);
+				seats++;
+				if (seats == numSeat) {
+					seatsFilled = true;
+					
+				}
 				convey.wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -278,6 +276,17 @@ public class Marching {
 
 	public synchronized int getGreenpadeGroup() {
 		return greenParadeGroups;
+	}
+	public void puppetRelease (int seatNumber) {
+		Object convey = puppetShow.get(seatNumber);
+		synchronized(convey) {
+			try {
+				convey.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

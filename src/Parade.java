@@ -46,7 +46,7 @@ public class Parade extends Object {
 		clockThread.start();
 
 		for (int i = 0; i < numOrange; i++) { // Creates Each Thread With Array Used
-			Thread orangeStudent = new Thread(new OrangeStudent(march, "orange " + i));
+			Thread orangeStudent = new Thread(new OrangeStudent(march, "orange " + i,numSeat));
 			orangeList.add(orangeStudent);
 		}
 
@@ -55,7 +55,7 @@ public class Parade extends Object {
 		// visitor Array using For Each Loop
 
 		for (int j = 0; j < numGreen; j++) { // Creates Each Thread With Array Used
-			Thread greenStudent = new Thread(new GreenStudent(march, "green " + j));
+			Thread greenStudent = new Thread(new GreenStudent(march, "green " + j,numSeat));
 			greenList.add(greenStudent);
 		}
 

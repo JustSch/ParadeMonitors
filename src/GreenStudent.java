@@ -5,11 +5,12 @@ public class GreenStudent implements Runnable {
 	public String name;
 	public Object Convey;
 	public static long time = System.currentTimeMillis();
+	public int numSeat;
 
-	public GreenStudent(Marching march, String name) {
+	public GreenStudent(Marching march, String name, int numSeat) {
 		this.march = march;
 		this.name = name;
-
+		this.numSeat = numSeat;
 	}
 
 	@Override

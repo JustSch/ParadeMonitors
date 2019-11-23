@@ -3,11 +3,13 @@ public class OrangeStudent implements Runnable {
 	private Marching march = null;
 	public String name;
 	public static long time = System.currentTimeMillis();
+	public int numSeat;
 
-	public OrangeStudent(Marching march, String name) {
+	public OrangeStudent(Marching march, String name, int numSeat) {
 		// TODO Auto-generated constructor stub
 		this.march = march;
 		this.name = name;
+		this.numSeat = numSeat;
 
 	}
 
