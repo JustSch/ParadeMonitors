@@ -241,6 +241,22 @@ public class Marching {
 			convey.notify();
 		}
 	}
+	
+	public synchronized int letInPuppetShow() {
+		seats++;
+		return seats;
+	}
+	public void sitDown(int seatNumber) {
+		Object convey = puppetShow.get(seatNumber);
+		synchronized (convey) {
+			try {
+				convey.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public synchronized int getGreenpadeGroup() {
 		return greenParadeGroups;

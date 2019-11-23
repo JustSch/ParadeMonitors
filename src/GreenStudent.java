@@ -3,6 +3,7 @@ public class GreenStudent implements Runnable {
 
 	private Marching march = null;
 	public String name;
+	public Object Convey;
 
 	public GreenStudent(Marching march, String name) {
 		this.march = march;
@@ -18,7 +19,12 @@ public class GreenStudent implements Runnable {
 		int waiting = march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
 		march.paradeWaiting(waiting);
 		System.out.println("well");
-		
+		//each has own convey for not in puppet show.
+		//ones that get through wait for end 
+		//ones that dont wait on convey!!!!
+		//let in puppetshow
+		//wait on monitor if cant
+		//other wise go in monitor in vector and wait
 		// march.exitParade();
 	}
 
