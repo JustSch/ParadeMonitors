@@ -256,7 +256,7 @@ public class Marching {
 		
 	}
 
-	public void sitDown(int numSeat) {
+	public void sitDown(int numSeat) {//reached when can go in
 		Object convey = new Object();
 		synchronized (convey) {
 			try {
