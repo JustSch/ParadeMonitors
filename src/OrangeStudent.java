@@ -20,8 +20,9 @@ public class OrangeStudent implements Runnable {
 		// System.out.println(Thread.currentThread().getName());
 		
 		int waiting = march.letOrangeInParade();
-		msg("I have entered the parade");
+		
 		march.paradeWaiting(waiting);
+		msg("I have entered the parade");
 		msg("I have exited the parade");
 
 		//System.out.println("ddddd");

@@ -23,6 +23,8 @@ public class Marching {
 	private static Object ClockNotifier = new Object(); // No things can keep being added to vector!!!
 	private static int greenParadeGroups = 0;
 
+
+	public static long time = System.currentTimeMillis();
 	public Marching() {
 
 	}
@@ -175,6 +177,7 @@ public class Marching {
 	public static void releaseParadeGroups(int groupNumber) {
 		Object convey = paradeGroups.get(groupNumber);
 		synchronized (convey) {
+			msg("A group is entering in the parade");
 			convey.notifyAll();
 		}
 	}
@@ -184,6 +187,7 @@ public class Marching {
 		synchronized (convey) {
 			while (true) {
 				try {
+					msg("I lined up for the parade");
 					convey.wait();
 					break;
 				} catch (InterruptedException e) {
@@ -238,7 +242,7 @@ public class Marching {
 	public synchronized boolean cantEnter(Object convey) {
 		Boolean status;
 		
-		if (seats == 6 && seatsFilled) {
+		if (seats >= 6 && seatsFilled) {
 			puppetShowWait.add(convey);
 			status = true;
 		} else
@@ -294,5 +298,9 @@ public class Marching {
 			convey.notify();
 		}
 	}
+	
+	public synchronized static void msg(String m) {
+		 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
+		 }
 
 }
