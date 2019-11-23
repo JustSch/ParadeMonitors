@@ -99,18 +99,7 @@ public class Marching {
 	}
 
 	public synchronized int letOrangeInParade() {
-		// Object convey = paradeGroups.get(paradersEntered);//cant enforce order they
-		// get number Enforce by thread ID?
-
-		// synchronized (paradeGroups) { // subtring the threadname?
-		/*
-		 * while (true) {
-		 * 
-		 * // convey.wait(); // paradeGroups.get(paradersEntered).wait(); can work too?
-		 * // waiting(orangeStudents); try { paradeGroups.get(orangeStudents).wait(); }
-		 * catch (InterruptedException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } break; }
-		 */
+		
 		System.out.println(Thread.currentThread().getName());
 
 		orangeStudents++;
@@ -133,19 +122,7 @@ public class Marching {
 	}
 
 	public synchronized int letGreenInParade() {
-		// Object convey = paradeGroups.get(greenParadeGroups);
-		// synchronized (paradeGroups) {
-		/*
-		 * System.out.println("jjjjjjjjjjjjjjjj"); while (true) { //
-		 * System.out.println("there");
-		 * 
-		 * 
-		 * // convey.wait(); // waiting(greenParadeGroups); try {
-		 * paradeGroups.get(greenParadeGroups).wait(); } catch (InterruptedException e)
-		 * { // TODO Auto-generated catch block e.printStackTrace(); } break;
-		 * 
-		 * }
-		 */
+		
 		System.out.println(Thread.currentThread().getName());
 
 		if (greenStudents % 2 == 0 && greenStudents != 0) {
@@ -279,6 +256,12 @@ public class Marching {
 
 	public synchronized void resetSeats() {
 		seats = 0;
+	}
+	
+	public synchronized int addSeats() {
+		seats++;
+		return seats;
+		
 	}
 
 	public void sitDown(int seatNumber) {
