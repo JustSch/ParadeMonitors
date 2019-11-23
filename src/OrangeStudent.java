@@ -22,7 +22,8 @@ public class OrangeStudent implements Runnable {
 		int waiting = march.letOrangeInParade();
 		
 		march.paradeWaiting(waiting);
-		msg("I have entered the parade");
+		//msg("I have entered the parade");
+		march.walking();
 		msg("I have exited the parade");
 
 		//System.out.println("ddddd");

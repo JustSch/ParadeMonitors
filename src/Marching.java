@@ -189,6 +189,7 @@ public class Marching {
 				try {
 					msg("I lined up for the parade");
 					convey.wait();
+					msg("I have entered the parade");
 					break;
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -302,5 +303,9 @@ public class Marching {
 	public synchronized static void msg(String m) {
 		 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
 		 }
+	
+	public synchronized void walking() {
+		msg("I am Marching in the Parade");
+	}
 
 }

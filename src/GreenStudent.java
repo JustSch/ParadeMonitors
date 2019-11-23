@@ -21,9 +21,10 @@ public class GreenStudent implements Runnable {
 		int waiting = march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
 		//;
 		march.paradeWaiting(waiting);
-		msg("I have entered the parade");
+		//msg("I have entered the parade");
+		march.walking();
 		msg("I have exited the parade");
-		;
+		//;
 	//	march.letInPuppetShow();
 		//march.sitDown();
 		
