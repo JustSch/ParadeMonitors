@@ -59,30 +59,7 @@ public class Marching {
 	// Orange Enters To Keep Track of where orange should go -Increment as needed
 	// Green Enters
 	// Split into letOrangeIn/letGreenIn
-	public void letInParade() {
-		Object convey = new Object();
-		convey = paradeGroups.get(paradersEntered);// needs convey before synch!!!!!
-		paradersEntered++; // need to add one before for mod to work
-		synchronized (convey) { // replace with
 
-			if (paradersEntered % 3 == 0) {
-				paradeGroupsFormed++;
-			}
-			paradersEntered++;// Use this to figure out which convey is passed
-			// System.out.println(Thread.currentThread().getName().substring(0, 1));
-			if (Thread.currentThread().getName().substring(0, 1).contentEquals("o")) {
-				// hasOrange = true;
-				// Critical Section!!
-				// System.out.println("here");
-				// letOrangeInParade(convey); //pass in or calculate from vector?
-			}
-
-			// For Greens Here
-			// if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-			// letGreenInParade(convey);
-		}
-
-	}
 
 	// Similar for puppet theater?
 	public synchronized void exitParade() {
@@ -247,7 +224,7 @@ public class Marching {
 	public synchronized boolean cantEnter(Object convey) {
 		Boolean status;
 
-		if (seats >= 6 && seatsFilled) {
+		if (seats >= 6 || seatsFilled) {
 			puppetShowWait.add(convey);
 			status = true;
 		} else
@@ -268,11 +245,11 @@ public class Marching {
 
 	}
 
-	public void sitDown(int numSeat) {// reached when can go in
+	public void sitDown(int numSeat,int seat) {// reached when can go in
 		Object convey = new Object();
 		synchronized (convey) {
 			try {
-				puppetShow.add(seats, convey);
+				puppetShow.add(seat, convey);
 				if (seats == numSeat) {
 					msg(String.valueOf(numSeat)+'s');
 					msg(String.valueOf(seats));

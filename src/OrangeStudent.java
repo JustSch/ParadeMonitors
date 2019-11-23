@@ -27,7 +27,7 @@ public class OrangeStudent implements Runnable {
 		march.walking();
 		msg("I have exited the parade");
 		mySeat=march.letInPuppetShow();//checks if seats are available or waits
-		march.sitDown(mySeat);//takes a seat and (decrements?) seatsAvailabe aka numSeats?
+		march.sitDown(numSeat,mySeat);//takes a seat and (decrements?) seatsAvailabe aka numSeats?
 		// System.out.println("ddddd");
 		// march.exitParade();
 
