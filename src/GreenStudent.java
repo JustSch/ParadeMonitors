@@ -19,6 +19,8 @@ public class GreenStudent implements Runnable {
 		int waiting = march.letGreenInParade(); //add then get number to wait on.//have it return number needed after add!!
 		march.paradeWaiting(waiting);
 		System.out.println("well");
+		
+		
 		//each has own convey for not in puppet show.
 		//ones that get through wait for end 
 		//ones that dont wait on convey!!!!

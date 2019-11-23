@@ -8,7 +8,9 @@ public class Marching {
 	// private Vector redInParade = new Vector();
 	private static Vector<Object> paradeGroups = new Vector<Object>();
 	private static Vector<Object> puppetShow = new Vector<Object>();
-	private static int seats =0;
+	private static Vector<Object> puppetShowWait = new Vector<Object>();
+	private static int seats = 0;
+	private boolean seatsFilled = false;
 	private int greenStudents = 0;// has two
 	private int orangeStudents = -1; // has one
 	private boolean hasOrange = false;
@@ -35,8 +37,9 @@ public class Marching {
 		}
 
 	}
-	public void readyPuppetShow () {
-		for (int i =0; i<6;i++) {
+
+	public void readyPuppetShow() {
+		for (int i = 0; i < 6; i++) {
 			Object convey = new Object();
 			puppetShow.add(convey);
 		}
@@ -99,7 +102,7 @@ public class Marching {
 		// Object convey = paradeGroups.get(paradersEntered);//cant enforce order they
 		// get number Enforce by thread ID?
 
-		//synchronized (paradeGroups) { // subtring the threadname?
+		// synchronized (paradeGroups) { // subtring the threadname?
 		/*
 		 * while (true) {
 		 * 
@@ -108,27 +111,25 @@ public class Marching {
 		 * catch (InterruptedException e) { // TODO Auto-generated catch block
 		 * e.printStackTrace(); } break; }
 		 */
-			System.out.println(Thread.currentThread().getName());
+		System.out.println(Thread.currentThread().getName());
 
-			orangeStudents++;
-			paradersEntered++;
-			// System.out.println("f");
-			// convey =
-			if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-				System.out.println("test");
-			// System.out.println("hhhhhhhhhh");
-			if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
-											// green and orange!!!
-			{
-				groupFormed = true;
-				// paradeGroupsFormed++;
-				wakeClock();
-			}
-			return orangeStudents;
-			
-			
+		orangeStudents++;
+		paradersEntered++;
+		// System.out.println("f");
+		// convey =
+		if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
+			System.out.println("test");
+		// System.out.println("hhhhhhhhhh");
+		if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
+										// green and orange!!!
+		{
+			groupFormed = true;
+			// paradeGroupsFormed++;
+			wakeClock();
+		}
+		return orangeStudents;
 
-		//}
+		// }
 	}
 
 	public synchronized int letGreenInParade() {
@@ -146,8 +147,8 @@ public class Marching {
 		 * }
 		 */
 		System.out.println(Thread.currentThread().getName());
-		
-		if (greenStudents % 2 == 0 && greenStudents!=0) {
+
+		if (greenStudents % 2 == 0 && greenStudents != 0) {
 			greenParadeGroups++;
 		}
 		greenStudents++;
@@ -198,7 +199,7 @@ public class Marching {
 	public void wakeClock() {
 		Object clockNotifier = ClockNotifier;
 		synchronized (clockNotifier) {
-			ClockNotifier.notify();
+			clockNotifier.notify();
 		}
 	}
 
@@ -223,10 +224,10 @@ public class Marching {
 			}
 		}
 	}
-	
+
 	public void waiting(Object Notifier) {
 		Object convey = Notifier;
-		synchronized(convey) {
+		synchronized (convey) {
 			try {
 				convey.wait();
 			} catch (InterruptedException e) {
@@ -235,19 +236,53 @@ public class Marching {
 			}
 		}
 	}
+
 	public void releasing(Object Notifier) {
 		Object convey = Notifier;
-		synchronized(convey) {
+		synchronized (convey) {
 			convey.notify();
 		}
 	}
-	
-	public synchronized int letInPuppetShow() {
-		seats++;
-		return seats;
+
+	public void letInPuppetShow() {
+		Object convey = new Object();
+		synchronized (convey) {
+			if (cantEnter(convey)) {
+				while (true) {
+					try {
+						convey.wait();
+						break;
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			}
+		}
+
 	}
+
+	public synchronized boolean cantEnter(Object convey) {
+		Boolean status = false;
+
+		if (seats >= 6 && seatsFilled) {
+			puppetShow.add(convey);
+			status = true;
+		} else
+			status = false;
+		seatsFilled = false;
+
+		return status;
+
+	}
+
+	public synchronized void resetSeats() {
+		seats = 0;
+	}
+
 	public void sitDown(int seatNumber) {
-		Object convey = puppetShow.get(seatNumber);
+		Object convey = puppetShowWait.get(seatNumber);
 		synchronized (convey) {
 			try {
 				convey.wait();

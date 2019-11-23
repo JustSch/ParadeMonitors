@@ -27,10 +27,6 @@ public class Clock implements Runnable{
 		
 	}
 	
-	public synchronized void Age() {
-		long time = System.currentTimeMillis();
-		System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+time);
-	}
 	 public void msg(String m) {
 	 System.out.println("["+(System.currentTimeMillis()-time)+"] "+Thread.currentThread().getName()+": "+m);
 	 }
@@ -44,7 +40,7 @@ public class Clock implements Runnable{
 		try {
 			waiting();
 			
-			Thread.sleep(1500);
+			Thread.sleep(1500); 
 			releaseGroups();
 			march.releasing(StaffNotifier);
 			msg("It is 11:15AM. The First Show has Started");
