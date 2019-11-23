@@ -73,7 +73,7 @@ public class Clock implements Runnable {
 
 	public void releaseGroups() {
 		for (int i = 0; i < total; i++) {
-			Marching.releaseParadeGroups(i);
+			Marching.releaseParadeGroups();
 		}
 	}
 

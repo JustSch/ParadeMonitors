@@ -151,11 +151,12 @@ public class Marching {
 		}
 	}
 
-	public static void releaseParadeGroups(int groupNumber) {
-		Object convey = paradeGroups.get(groupNumber);
+	public static void releaseParadeGroups() {
+		Object convey = paradeGroups.get(0);
 		synchronized (convey) {
 			msg("A group is entering in the parade");
 			convey.notifyAll();
+			paradeGroups.remove(0);
 		}
 	}
 
