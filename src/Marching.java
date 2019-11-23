@@ -253,7 +253,7 @@ public class Marching {
 		} else
 			status = false;
 		//seatsFilled = false;
-
+		msg(String.valueOf(status));
 		return status;
 
 	}
@@ -274,6 +274,8 @@ public class Marching {
 			try {
 				puppetShow.add(seats, convey);
 				if (seats == numSeat) {
+					msg(String.valueOf(numSeat)+'s');
+					msg(String.valueOf(seats));
 					seatsFilled = true;
 
 				}
