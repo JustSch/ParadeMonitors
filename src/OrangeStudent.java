@@ -18,30 +18,29 @@ public class OrangeStudent implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		setName(name);
-		
-		
+
 		// System.out.println(Thread.currentThread().getName());
+		while (march.isParadeOngoing()) {
+			int waiting = march.letOrangeInParade();
 
-		int waiting = march.letOrangeInParade();
+			march.paradeWaiting(waiting);
+			// msg("I have entered the parade");
+			// march.walking();
+			msg("I have exited the parade");
 
-		march.paradeWaiting(waiting);
-		// msg("I have entered the parade");
-		//march.walking();
-		msg("I have exited the parade");
-		
-		try {
-			msg("I Have Taken a Snack Break");
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			msg("I didn't like the parade so I went home");
+			try {
+				msg("I Have Taken a Snack Break");
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				msg("I didn't like the parade so I went home");
+			}
+
+			// enterPuppetShow/More parades
+
+			march.puppetShowWait();
+			march.watchingPuppetShow();
 		}
-
-		// enterPuppetShow/More parades
-		
-		march.puppetShowWait();
-		march.watchingPuppetShow();
-	
 
 	}
 

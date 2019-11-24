@@ -22,6 +22,7 @@ public class Marching {
 	// in parade?
 	private static Object ClockNotifier = new Object(); // No things can keep being added to vector!!!
 	private static int greenParadeGroups = 0;
+	private static boolean paradeOngoing;
 
 	public static long time = System.currentTimeMillis();
 
@@ -310,6 +311,18 @@ public class Marching {
 		orangeStudents=-1;
 		greenStudents =0;
 		paraders =0;
+	}
+
+	public  boolean isParadeOngoing() {
+		return paradeOngoing;
+	}
+
+	public void setParadeIsOngoing() {
+		paradeOngoing = true;
+	}
+	
+	public void setParadeOver() {
+		paradeOngoing = false;
 	}
 
 }

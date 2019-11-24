@@ -44,6 +44,7 @@ public class Clock implements Runnable {
 		try {
 			//waiting();
 			//setParadeOngoing!!!!!!
+			march.setParadeIsOngoing();
 			Thread.sleep(1500);//"sleep" while they line up for parade CHANGE to random time!!!
 			releaseGroups();
 			march.resetNum();
@@ -54,13 +55,19 @@ public class Clock implements Runnable {
 			Thread.sleep(4500);
 			msg("It is 12:00PM. The Second Parade has Started");
 			
+			msg("It is 12:45PM. The Second Show Has Started");
+			march.releasing(StaffNotifier);
 			msg("It is 1:00PM. The Third Parade has Started");
 			
 			msg("It is 2:00PM. The Fourth Parade has Started");
 			
+			msg("It is 2:15PM. The Third Show Has Started");
+			
 			msg("It is 3:00PM. The Fifth Parade has Started");
 			
-			msg("It is 3:00PM. The Final Parade has Started");
+			msg("It is 3:45PM. The Final Show Has Started");
+			
+			msg("It is 4:00PM. The Final Parade has Started");
 			// ClockNotifier.wait();
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
