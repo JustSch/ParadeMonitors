@@ -9,9 +9,9 @@ public class Parade extends Object {
 		int numGreen = 14;
 		int numOrange = 7;
 		int numSeat = 6; // tent capacity
-		//used if values given via command line
+		
 		try {
-			numGreen = Integer.valueOf(args[0]);
+			numGreen = Integer.valueOf(args[0]); //used if values given via command line
 			numOrange = Integer.valueOf(args[1]);
 			numSeat = Integer.valueOf(args[2]);
 		}
@@ -21,7 +21,7 @@ public class Parade extends Object {
 		}
 		ArrayList<Thread> orangeList = new ArrayList<Thread>();
 		ArrayList<Thread> greenList = new ArrayList<Thread>();
-		// setNumOrange();
+
 		Marching march = new Marching();
 		march.startParade(numOrange);
 		Random random = new Random();
