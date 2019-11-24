@@ -20,20 +20,26 @@ public class StaffMember implements Runnable {
 		// ShowsInSession!!!
 		setName(name);
 		while (march.isParadeOngoing()) {
-			msg("The Puppet Show Will Start Soon: Opening Tent");
+			msg("The Puppet Show Will Start Soon: Opening Tent "+numSeat+" may enter the tent");
 			march.waiting(StaffNotifier);
+			if(!march.isParadeOngoing()) break;
 			// march.
 			try {
 				openingCurtain();
+				guideToExit();
 			} catch (Exception e) {
-				msg("The Students Were too slow to see the parade at this time");
+				msg("The Students Were too slow to see the puppet show at this time");
 			}
+			
 			msg("The Puppet Show Is Starting: Closing Tent");
+			if(!march.isParadeOngoing()) break;
 
-			msg("The Puppet Show Has Ended: 6 More Students May Enter");
 
 		}
-		msg("here");
+		endParade();
+		msg("The parade is ending please make your way to the nearest exit");
+		//public void 
+		
 	}
 
 	public final void setName(String name) {
@@ -68,6 +74,10 @@ public class StaffMember implements Runnable {
 		for (int j = 0; j < numSeat; j++) {
 			march.puppetRelease();
 		}
+	}
+	
+	public void endParade() {
+		march.releaseStuff();
 	}
 
 }

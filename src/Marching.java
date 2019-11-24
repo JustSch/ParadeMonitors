@@ -1,11 +1,7 @@
 import java.util.Vector;
 
 public class Marching {
-	// two green one orange in parade
-	// orange goes first and allows 2 greens?
-	// Create enough convey objects for each group?
-	// private Vector greenInParade = new Vector(); //make convey object too
-	// private Vector redInParade = new Vector();
+
 	private static Vector<Object> paradeGroups = new Vector<Object>();
 	private static Vector<Object> puppetShow = new Vector<Object>();
 	private static Vector<Object> puppetShowWait = new Vector<Object>();
@@ -30,9 +26,8 @@ public class Marching {
 
 	}
 
-	// creates convey parade objects to pass through later
-	// Warning if can't create enough?
-	public void startParade(int paradeNumber) {
+	
+	public synchronized void startParade(int paradeNumber) {
 		for (int i = 0; i < paradeNumber; i++) {
 			Object convey = new Object();
 			paradeGroups.add(convey);
@@ -54,14 +49,7 @@ public class Marching {
 				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + time);
 	}
 
-	// Let Thread in based by name? yes can get thread name
-	// Creates then passes through?
-
-	// Orange Enters To Keep Track of where orange should go -Increment as needed
-	// Green Enters
-	// Split into letOrangeIn/letGreenIn
-
-	// Similar for puppet theater?
+	
 	public synchronized void exitParade() {
 		for (Object convey : paradeGroups) {
 			for (int i = 0; i < 3; i++)
@@ -71,22 +59,11 @@ public class Marching {
 
 	public synchronized int letOrangeInParade() {
 
-		// System.out.println(Thread.currentThread().getName());
 
 		orangeStudents++;
 		paradersEntered++;
-		// System.out.println("f");
-		// convey =
-		if (Thread.currentThread().getName().substring(0, 1).contentEquals("g"))
-			System.out.println("test");
-		// System.out.println("hhhhhhhhhh");
-		if (paradersEntered % 3 == 0) // no gurantee that 3 who entered are in the right order must count
-										// green and orange!!!
-		{
-			groupFormed = true;
-			// paradeGroupsFormed++;
-			wakeClock();
-		}
+		
+		
 		return orangeStudents;
 
 		// }
@@ -101,11 +78,7 @@ public class Marching {
 		}
 		greenStudents++;
 		paradersEntered++;
-		if (paradersEntered % 3 == 0) {
-			groupFormed = true;
-			// paradeGroupsFormed++;
-			wakeClock();
-		}
+		
 		// System.out.println(greenParadeGroups);
 		return greenParadeGroups;
 
@@ -157,10 +130,15 @@ public class Marching {
 			msg("A group is entering in the parade");
 			convey.notifyAll();
 			paradeGroups.remove(0);
+			
 		}
 	}
 
 	public void paradeWaiting(int paradeWaitNumber) {
+		if(paradeGroups.isEmpty()) {
+			msg("yes");
+		}
+		msg(String.valueOf(paradeWaitNumber));
 		Object convey = paradeGroups.get(paradeWaitNumber);
 		synchronized (convey) {
 			while (true) {
@@ -171,7 +149,7 @@ public class Marching {
 					break;
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					msg("Cant wait for parade");
 				}
 			}
 		}
@@ -253,10 +231,15 @@ public class Marching {
 
 	public void releaseStuff() {
 		// Object o = new Objec t();
-		resetSeats();
+		//resetSeats();
 		for (Object o : puppetShow) {
 			synchronized (o) {
 				o.notify();
+			}
+		}
+		for (Object j : puppetShowWait) {
+			synchronized (j) {
+				j.notify();
 			}
 		}
 	}

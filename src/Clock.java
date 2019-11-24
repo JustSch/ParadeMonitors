@@ -48,33 +48,89 @@ public class Clock implements Runnable {
 			//setParadeOngoing!!!!!!
 			msg("The Parade Is Starting: Please Wait In Line");
 			Thread.sleep(1500);//"sleep" while they line up for parade CHANGE to random time!!!
-			releaseGroups();
-			march.resetNum();
+			try {
+				releaseGroups();
+				march.startParade(total);
+			
+			}
+			catch (Exception e) {
+				msg("Students were too slow to go to the parade at this time");
+			}
+			//march.resetNum();
 
 			msg("It is 11:15AM. The First Show has Started");
 			march.releasing(StaffNotifier);
 			
-			Thread.sleep(4500);
-			msg("It is 12:00PM. The Second Parade has Started");
 			
+			msg("It is 12:00PM. The Second Parade has Started");
+			try {
+				releaseGroups();
+				march.startParade(total);
+			
+			}
+			catch (Exception e) {
+				msg("Students were too slow to go to the parade at this time");
+			}
+			//march.resetNum();
+			Thread.sleep(4500);
 			msg("It is 12:45PM. The Second Show Has Started");
 			march.releasing(StaffNotifier);
-			Thread.sleep(4500);
+			Thread.sleep(1500);
 			msg("It is 1:00PM. The Third Parade has Started");
+			try {
+				releaseGroups();
+				march.startParade(total);
 			
-			march.releasing(StaffNotifier);
+			}
+			catch (Exception e) {
+				msg("Students were too slow to go to the parade at this time");
+			}
+			//march.resetNum();
+			Thread.sleep(6000);
+			
 			msg("It is 2:00PM. The Fourth Parade has Started");
-			Thread.sleep(4500);
+			try {
+				releaseGroups();
+				march.startParade(total);
+			
+			}
+			catch (Exception e) {
+				msg("Students were too slow to go to the parade at this time");
+			}
+			//march.resetNum();
+			Thread.sleep(1500);
 			msg("It is 2:15PM. The Third Show Has Started");
 			
 			march.releasing(StaffNotifier);
+			Thread.sleep(4500);
 			msg("It is 3:00PM. The Fifth Parade has Started");
+			try {
+				releaseGroups();
+				march.startParade(total);
+			
+			}
+			catch (Exception e) {
+				msg("Students were too slow to go to the parade at this time");
+			}
+			//march.resetNum();
 			Thread.sleep(4500);
 			msg("It is 3:45PM. The Final Show Has Started");
-			
 			march.releasing(StaffNotifier);
+			Thread.sleep(1500);
 			msg("It is 4:00PM. The Final Parade has Started");
+			try {
+				releaseGroups();
+				march.startParade(total);
 			
+			}
+			catch (Exception e) {
+				msg("Students were too slow to go to the parade at this time");
+			}
+			//march.resetNum();
+			
+			
+			
+			endParade();
 			msg("The Parade has ended. You Don't have to go home but, you can't stay here");
 			// ClockNotifier.wait();
 		} catch (InterruptedException e) {
@@ -87,6 +143,18 @@ public class Clock implements Runnable {
 		
 		
 
+	}
+	public void endParade() {
+		march.setParadeOver();
+		try {
+			releaseGroups();
+			march.releasing(StaffNotifier);
+		
+		}
+		catch (Exception e) {
+			msg("Students were too slow to go to the parade at this time");
+		}
+		
 	}
 
 	public void waiting() {
