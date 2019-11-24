@@ -25,17 +25,9 @@ public class GreenStudent implements Runnable {
 		// msg("I have entered the parade");
 		march.walking();
 		msg("I have exited the parade");
-		// ;
-		// march.letInPuppetShow();
-		// march.sitDown();
-
-		// each has own convey for not in puppet show.
-		// ones that get through wait for end
-		// ones that dont wait on convey!!!!
-		// let in puppetshow
-		// wait on monitor if cant
-		// other wise go in monitor in vector and wait
-		// march.exitParade();
+		
+		//march.puppetShowWait();
+		//march.watchingPuppetShow();
 	}
 
 	public final void setName(String name) {
