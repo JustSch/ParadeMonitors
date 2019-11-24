@@ -214,6 +214,7 @@ public class Marching {
 					msg("I am watching the puppet show");
 					puppetShow.add(convey);
 					convey.wait();
+					msg("I left the puppet show");
 					break;
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -259,7 +260,7 @@ public class Marching {
 		}
 	}
 
-	public void pShowWait() {
+	public void puppetShowWait() {
 		Object convey = new Object();
 		synchronized (convey) {
 			try {
@@ -281,15 +282,15 @@ public class Marching {
 		return greenParadeGroups;
 	}
 
-	public void puppetRelease(int seatNumber) {
-		Object convey = puppetShow.get(seatNumber);
+	public void puppetRelease() {
+		Object convey = puppetShow.remove(0);
 		synchronized (convey) {
 			convey.notify();
 		}
 	}
 
-	public static void releasingFromPuppetWaiting(int waitNumber) {
-		Object convey = puppetShowWait.get(waitNumber);
+	public static void releasingFromPuppetWaiting() {
+		Object convey = puppetShowWait.remove(0);
 		synchronized (convey) {
 			convey.notify();
 		}

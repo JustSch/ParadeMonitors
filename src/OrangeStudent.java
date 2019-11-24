@@ -33,7 +33,9 @@ public class OrangeStudent implements Runnable {
 
 		// enterPuppetShow/More parades
 		
-		
+		march.puppetShowWait();
+		march.watchingPuppetShow();
+	
 
 	}
 

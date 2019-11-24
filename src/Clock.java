@@ -37,7 +37,7 @@ public class Clock implements Runnable {
 	public void run() {
 		setName(clockName);
 		march.readyPuppetShow();
-		Thread staffMember = new Thread(new StaffMember(march, "Staff Member", StaffNotifier));
+		Thread staffMember = new Thread(new StaffMember(march, "Staff Member", StaffNotifier,numSeat));
 		staffMember.start();
 		msg("It is 11:00AM The Parade Has Started");
 
