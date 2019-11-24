@@ -28,6 +28,7 @@ public class GreenStudent implements Runnable {
 		
 			try {
 				Thread.sleep(walkingTime);
+				if(!march.isParadeOngoing()) break;
 				march.walking();
 			} catch (InterruptedException e1) {
 				msg("I didn't like the parade so I went home");
