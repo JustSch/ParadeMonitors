@@ -60,7 +60,6 @@ public class Marching {
 	// Green Enters
 	// Split into letOrangeIn/letGreenIn
 
-
 	// Similar for puppet theater?
 	public synchronized void exitParade() {
 		for (Object convey : paradeGroups) {
@@ -199,38 +198,42 @@ public class Marching {
 		}
 	}
 
-	public int letInPuppetShowEntance() {
-		Object convey = new Object();
+	public void letInPuppetShow() {
+		Object convey = puppetShowWait.remove(0);
 		synchronized (convey) {
-			if (cantEnter(convey)) {
-				while (true) {
-					try {
-						msg("I am waiting to get to see the puppet show");
-						convey.wait();
-						break;
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-
-			}
-			//addSeats();
-			return seats;
+			convey.notify();
 		}
-		 
 
+	}
+	
+	public void watchingPuppetShow() {
+		Object convey = new Object();
+		synchronized(convey){
+			while (true) {
+				try {
+					msg("I am watching the puppet show");
+					puppetShow.add(convey);
+					convey.wait();
+					break;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			//}
+
+		}
+		}
 	}
 
 	public synchronized boolean cantEnter(Object convey) {
 		Boolean status;
-		msg(String.valueOf(seats)+'m');
+		msg(String.valueOf(seats) + 'm');
 		if (seats >= 6 || seatsFilled) {
 			puppetShowWait.add(convey);
 			status = true;
 		} else
 			status = false;
-		//seatsFilled = false;
+		// seatsFilled = false;
 		msg(String.valueOf(status));
 		return status;
 
@@ -245,9 +248,9 @@ public class Marching {
 		return seats;
 
 	}
-	
+
 	public void releaseStuff() {
-		//Object o = new Objec	t();
+		// Object o = new Objec t();
 		resetSeats();
 		for (Object o : puppetShow) {
 			synchronized (o) {
@@ -256,20 +259,17 @@ public class Marching {
 		}
 	}
 
-	public void sitDown(int numSeat,int seat) {// reached when can go in
+	public void pShowWait() {
 		Object convey = new Object();
 		synchronized (convey) {
 			try {
-				puppetShow.add(seat, convey);
-				addSeats();
-				if (seats == numSeat) {
-					msg(String.valueOf(numSeat)+'s');
-					msg(String.valueOf(seats));
-					seatsFilled = true;
-
+				while (true) {
+					puppetShowWait.add(convey);
+					msg("I am standing in line for the puppet show");
+					convey.wait();
+					break;
 				}
-				msg("I am watching the puppet show");
-				convey.wait();
+
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
