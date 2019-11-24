@@ -267,6 +267,7 @@ public class Marching {
 				while (true) {
 					puppetShowWait.add(convey);
 					msg("I am standing in line for the puppet show");
+					msg("I will wander while I wait for the next show to begin");
 					convey.wait();
 					break;
 				}
@@ -303,6 +304,12 @@ public class Marching {
 
 	public synchronized void walking() {
 		msg("I am Marching in the Parade");
+	}
+	
+	public synchronized void resetNum() {
+		orangeStudents=-1;
+		greenStudents =0;
+		paraders =0;
 	}
 
 }

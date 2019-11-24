@@ -25,9 +25,18 @@ public class GreenStudent implements Runnable {
 		// msg("I have entered the parade");
 		march.walking();
 		msg("I have exited the parade");
+		try {
+			msg("I Have Taken a Snack Break");
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			msg("I didn't like the parade so I went home");
+		}
+
+		// enterPuppetShow/More parades
 		
-		//march.puppetShowWait();
-		//march.watchingPuppetShow();
+		march.puppetShowWait();
+		march.watchingPuppetShow();
 	}
 
 	public final void setName(String name) {

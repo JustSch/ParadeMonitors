@@ -44,8 +44,9 @@ public class Clock implements Runnable {
 		try {
 			//waiting();
 			//setParadeOngoing!!!!!!
-			Thread.sleep(1500);//"sleep" while they line up for parade
+			Thread.sleep(1500);//"sleep" while they line up for parade CHANGE to random time!!!
 			releaseGroups();
+			march.resetNum();
 
 			msg("It is 11:15AM. The First Show has Started");
 			march.releasing(StaffNotifier);

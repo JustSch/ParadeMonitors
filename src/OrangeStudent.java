@@ -18,6 +18,8 @@ public class OrangeStudent implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		setName(name);
+		
+		
 		// System.out.println(Thread.currentThread().getName());
 
 		int waiting = march.letOrangeInParade();
@@ -26,15 +28,19 @@ public class OrangeStudent implements Runnable {
 		// msg("I have entered the parade");
 		//march.walking();
 		msg("I have exited the parade");
-		//mySeat=march.letInPuppetShowEntance();//checks if seats are available or waits
-		//march.sitDown(numSeat,mySeat);//takes a seat and (decrements?) seatsAvailabe aka numSeats?
-		// System.out.println("ddddd");
-		// march.exitParade();
+		
+		try {
+			msg("I Have Taken a Snack Break");
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			msg("I didn't like the parade so I went home");
+		}
 
 		// enterPuppetShow/More parades
 		
-		//march.puppetShowWait();
-		//march.watchingPuppetShow();
+		march.puppetShowWait();
+		march.watchingPuppetShow();
 	
 
 	}
