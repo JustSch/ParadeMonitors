@@ -33,6 +33,7 @@ public class StaffMember implements Runnable {
 			msg("The Puppet Show Has Ended: 6 More Students May Enter");
 
 		}
+		msg("here");
 	}
 
 	public final void setName(String name) {
