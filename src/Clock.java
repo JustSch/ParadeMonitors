@@ -43,7 +43,6 @@ public class Clock implements Runnable {
 
 		try {
 			waiting();
-
 			Thread.sleep(1500);
 			releaseGroups();
 

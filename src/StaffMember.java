@@ -29,8 +29,7 @@ public class StaffMember implements Runnable {
 			msg("The Students Were too slow to see the parade at this time");
 		}
 		msg("The Puppet Show Is Starting: Closing Tent");
-		
-		
+
 		msg("The Puppet Show Has Ended: 6 More Students May Enter");
 		
 
