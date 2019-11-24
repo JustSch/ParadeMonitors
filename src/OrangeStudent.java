@@ -9,7 +9,6 @@ public class OrangeStudent implements Runnable {
 	public int totalParadeGroups;
 
 	public OrangeStudent(Marching march, String name, int numSeat, int totalParadeGroups) {
-		// TODO Auto-generated constructor stub
 		this.march = march;
 		this.name = name;
 		this.numSeat = numSeat;
@@ -19,21 +18,20 @@ public class OrangeStudent implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		setName(name);
-
-		// System.out.println(Thread.currentThread().getName());
 		Random random = new Random();
 		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
 		while (march.isParadeOngoing()) {
 			int waiting = march.letOrangeInParade();
 			
-			march.paradeWaiting(waiting%totalParadeGroups);
+			march.paradeWaiting(waiting%totalParadeGroups); //used to place student into the line for the parade
 	
-			if(!march.isParadeOngoing()) break;
-			march.walking();
+			if(!march.isParadeOngoing()) break;  //break if parade over
+			
 			try {
-				Thread.sleep(walkingTime);
+				march.walking();
+				Thread.sleep(walkingTime);  //sleep/march for random time in parade
+				if(!march.isParadeOngoing()) break;
 			} catch (InterruptedException e1) {
 				msg("I didn't like the parade so I went home");
 			}
@@ -46,12 +44,8 @@ public class OrangeStudent implements Runnable {
 				Thread.sleep(1000);
 				if(!march.isParadeOngoing()) break;
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				msg("I didn't like the parade so I went home");
 			}
-
-			
-
 			march.puppetShowWait();
 			if(!march.isParadeOngoing()) break;
 			march.watchingPuppetShow();
@@ -62,12 +56,10 @@ public class OrangeStudent implements Runnable {
 	}
 
 	public final void setName(String name) {
-
 		Thread.currentThread().setName(name); // Sets name of Thread
-
 	}
 
-	public void msg(String m) {
+	public void msg(String m) {  //Generic Message Method
 		System.out.println(
 				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + m);
 	}

@@ -4,21 +4,17 @@ public class Clock implements Runnable {
 
 	public static long time = System.currentTimeMillis();
 	public String clockName;
-	public Object ClockNotifier = new Object();
-	public int total;
+	public int total; //total amount of student groups for parade
 	public Marching march;
 	public static Object StaffNotifier = new Object();
-	public int numSeat;
+	public int numSeat; //number of seats for puppet show
 
 	public Clock() {
 
 	}
 
-	public Clock(String clockName, Object ClockNotifier, int total, Marching march, int numSeat) { // Constructor Used
-																									// To Set Thread
-																									// Name
+	public Clock(String clockName,  int total, Marching march, int numSeat) { 																			
 		this.clockName = clockName;
-		this.ClockNotifier = ClockNotifier;
 		this.total = total;
 		this.march = march;
 		this.numSeat = numSeat;
@@ -46,10 +42,8 @@ public class Clock implements Runnable {
 		msg("It is 11:00AM The Parade Has Started");
 
 		try {
-			//waiting();
-			//setParadeOngoing!!!!!!
 			msg("The Parade Is Starting: Please Wait In Line");
-			Thread.sleep(walkingTime);//"sleep" while they line up for parade CHANGE to random time!!!
+			Thread.sleep(walkingTime);//"sleep" while they line up
 			try {
 				releaseGroups();
 				march.startParade(total);
@@ -58,22 +52,19 @@ public class Clock implements Runnable {
 			catch (Exception e) {
 				msg("Students were too slow to go to the parade at this time");
 			}
-			//march.resetNum();
 
 			msg("It is 11:15AM. The First Show has Started");
 			march.releasing(StaffNotifier);
-			Thread.sleep(7500);
+			Thread.sleep(7500);  //sleep 75 min aka 1000 = 1min
 			
 			msg("It is 12:00PM. The Second Parade has Started");
 			try {
 				releaseGroups();
 				march.startParade(total);
-			
 			}
 			catch (Exception e) {
 				msg("Students were too slow to go to the parade at this time");
 			}
-			//march.resetNum();
 			Thread.sleep(4500);
 			msg("It is 12:45PM. The Second Show Has Started");
 			march.releasing(StaffNotifier);
@@ -87,7 +78,6 @@ public class Clock implements Runnable {
 			catch (Exception e) {
 				msg("Students were too slow to go to the parade at this time");
 			}
-			//march.resetNum();
 			Thread.sleep(6000);
 			
 			msg("It is 2:00PM. The Fourth Parade has Started");
@@ -99,7 +89,7 @@ public class Clock implements Runnable {
 			catch (Exception e) {
 				msg("Students were too slow to go to the parade at this time");
 			}
-			//march.resetNum();
+			
 			Thread.sleep(1500);
 			msg("It is 2:15PM. The Third Show Has Started");
 			
@@ -114,7 +104,6 @@ public class Clock implements Runnable {
 			catch (Exception e) {
 				msg("Students were too slow to go to the parade at this time");
 			}
-			//march.resetNum();
 			Thread.sleep(4500);
 			msg("It is 3:45PM. The Final Show Has Started");
 			march.releasing(StaffNotifier);
@@ -128,49 +117,27 @@ public class Clock implements Runnable {
 			catch (Exception e) {
 				msg("Students were too slow to go to the parade at this time");
 			}
-			//march.resetNum();
-			
-			
-			
+
 			endParade();
 			msg("The Parade has ended. You Don't have to go home but, you can't stay here");
-			// ClockNotifier.wait();
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
 		}
-		/*
-		 * while(true) { if (Marching.isParadeFilled())break;//Replace with wait in its
-		 * own object then is signalled when filled? yes use static one }
-		 */
 		
-		
-
 	}
-	public void endParade() {
+	public void endParade() {  //used to notify all objects used after parade has ended for the day
 		march.setParadeOver();
 		try {
 			releaseGroups();
-			march.releasing(StaffNotifier);
-		
+			march.releasing(StaffNotifier);	
 		}
 		catch (Exception e) {
-			msg("Students were too slow to go to the parade at this time");
+			msg("Students were too slow to exit the parade");
 		}
 		
 	}
 
-	public void waiting() {
-		synchronized (ClockNotifier) {
-			try {
-				ClockNotifier.wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void releaseGroups() {
+	public void releaseGroups() {   //releases students into parade
 		for (int i = 0; i < total; i++) {
 			Marching.releaseParadeGroups();
 		}

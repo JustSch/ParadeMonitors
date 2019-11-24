@@ -18,41 +18,30 @@ public class GreenStudent implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		setName(name);
-		// System.out.println(Thread.currentThread().getName());
 		Random random = new Random();
 		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
 		while (march.isParadeOngoing()) {
-			int waiting = march.letGreenInParade(); // add then get number to wait on.//have it return number needed
-													// after
-													// add!!
-			// ;
-			/*
-			 * try { march.paradeWaiting(waiting); } catch (Exception e) {
-			 * msg("Im lining up for the parade"); }
-			 */
-			march.paradeWaiting(waiting%totalParadeGroups);
+			int waiting = march.letGreenInParade();  
+			march.paradeWaiting(waiting%totalParadeGroups); //used to place itself in proper place in parade vector
 			if(!march.isParadeOngoing()) break;
-			// msg("I have entered the parade");
-			march.walking();
+		
 			try {
 				Thread.sleep(walkingTime);
+				march.walking();
 			} catch (InterruptedException e1) {
 				msg("I didn't like the parade so I went home");
 			}
 			if(!march.isParadeOngoing()) break;
 			msg("I have exited the parade");
+			if(!march.isParadeOngoing()) break;
 			try {
 				msg("I Have Taken a Snack Break");
 				Thread.sleep(walkingTime);
 				if(!march.isParadeOngoing()) break;
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				msg("I didn't like the parade so I went home");
 			}
-
-			// enterPuppetShow/More parades
 
 			march.puppetShowWait();
 			if(!march.isParadeOngoing()) break;
@@ -68,7 +57,7 @@ public class GreenStudent implements Runnable {
 
 	}
 
-	public void msg(String m) {
+	public void msg(String m) {  //Generic Message Method
 		System.out.println(
 				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + m);
 	}

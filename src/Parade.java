@@ -26,7 +26,7 @@ public class Parade extends Object {
 		march.startParade(numOrange); //Initializes objects in parade vector
 		
 
-		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(), numOrange, march, numSeat)); 
+		Thread clockThread = new Thread(new Clock("Clock", numOrange, march, numSeat)); 
 
 		clockThread.start(); //creates and starts clockThread
 

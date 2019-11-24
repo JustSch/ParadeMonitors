@@ -16,14 +16,11 @@ public class StaffMember implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub //While loop for paradesinSession and
-		// ShowsInSession!!!
 		setName(name);
 		while (march.isParadeOngoing()) {
 			msg("The Puppet Show Will Start Soon: Opening Tent "+numSeat+" may enter the tent");
 			march.waiting(StaffNotifier);
 			if(!march.isParadeOngoing()) break;
-			// march.
 			try {
 				openingCurtain();
 				guideToExit();
@@ -38,8 +35,7 @@ public class StaffMember implements Runnable {
 		}
 		endParade();
 		msg("The parade is ending please make your way to the nearest exit");
-		//public void 
-		
+
 	}
 
 	public final void setName(String name) {
@@ -48,35 +44,34 @@ public class StaffMember implements Runnable {
 
 	}
 
-	public void msg(String m) {
+	public void msg(String m) {  //Generic Message Method
 		System.out.println(
 				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + m);
 	}
 
-	public void waiting() {
+	public void waiting() {  //Used for the staff to wait on it's own object
 		synchronized (StaffNotifier) {
 			try {
 				StaffNotifier.wait();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				msg("The staff member quit his job");
 			}
 		}
 	}
 
-	public void openingCurtain() {
+	public void openingCurtain() {  //Allow students into puppet show
 		for (int i = 0; i < numSeat; i++) {
 			march.letInPuppetShow();
 		}
 	}
 
-	public void guideToExit() {
+	public void guideToExit() {  //guide students to the exit by releasing them for the puppet vector
 		for (int j = 0; j < numSeat; j++) {
 			march.puppetRelease();
 		}
 	}
 	
-	public void endParade() {
+	public void endParade() {  //releases all puppet related vectors
 		march.releasePuppetVectors();
 	}
 
