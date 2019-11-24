@@ -19,41 +19,36 @@ public class Parade extends Object {
 		catch (Exception e) {
 
 		}
-		ArrayList<Thread> orangeList = new ArrayList<Thread>();
-		ArrayList<Thread> greenList = new ArrayList<Thread>();
+		ArrayList<Thread> orangeList = new ArrayList<Thread>();//used for creating orangeStudents
+		ArrayList<Thread> greenList = new ArrayList<Thread>();//used for creating greenStudents
 
 		Marching march = new Marching();
-		march.startParade(numOrange);
+		march.startParade(numOrange); //Initializes objects in parade vector
 		
 
-		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(), numOrange, march, numSeat)); // Makes
+		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(), numOrange, march, numSeat)); 
 
-		clockThread.start();
+		clockThread.start(); //creates and starts clockThread
 
-		for (int i = 0; i < numOrange; i++) { // Creates Each Thread With Array Used
+		for (int i = 0; i < numOrange; i++) { // Creates Each Threads With Array Used
 			Thread orangeStudent = new Thread(new OrangeStudent(march, "orange " + i, numSeat, numOrange));
 			orangeList.add(orangeStudent);
 		}
 
 		for (Thread orange : orangeList)
-			orange.start(); // starts each thread in the
-		// visitor Array using For Each Loop
+			orange.start(); // starts each thread in the arrayList
+	
 
-		for (int j = 0; j < numGreen; j++) { // Creates Each Thread With Array Used
+		for (int j = 0; j < numGreen; j++) { // Creates Each Threads With Array Used
 			Thread greenStudent = new Thread(new GreenStudent(march, "green " + j, numSeat, numOrange));
 			greenList.add(greenStudent);
 		}
 
 		for (Thread green : greenList)
-			green.start(); // starts each thread in the
+			green.start(); // starts each thread in the arrayList
 
 	}
 
-	public static long time = System.currentTimeMillis();
-
-	public void Age(String m) {
-		System.out.println(
-				"[" + (System.currentTimeMillis() - time) + "] " + Thread.currentThread().getName() + ": " + m);
-	}
+	
 
 }

@@ -62,7 +62,7 @@ public class Clock implements Runnable {
 
 			msg("It is 11:15AM. The First Show has Started");
 			march.releasing(StaffNotifier);
-			
+			Thread.sleep(7500);
 			
 			msg("It is 12:00PM. The Second Parade has Started");
 			try {

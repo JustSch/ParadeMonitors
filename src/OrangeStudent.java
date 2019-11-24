@@ -29,7 +29,7 @@ public class OrangeStudent implements Runnable {
 			int waiting = march.letOrangeInParade();
 			
 			march.paradeWaiting(waiting%totalParadeGroups);
-			msg(String.valueOf(march.isParadeOngoing()));
+	
 			if(!march.isParadeOngoing()) break;
 			march.walking();
 			try {

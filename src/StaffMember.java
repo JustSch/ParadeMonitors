@@ -30,7 +30,7 @@ public class StaffMember implements Runnable {
 			} catch (Exception e) {
 				msg("The Students Were too slow to see the puppet show at this time");
 			}
-			
+			if(!march.isParadeOngoing()) break;
 			msg("The Puppet Show Is Starting: Closing Tent");
 			if(!march.isParadeOngoing()) break;
 
@@ -77,7 +77,7 @@ public class StaffMember implements Runnable {
 	}
 	
 	public void endParade() {
-		march.releaseStuff();
+		march.releasePuppetVectors();
 	}
 
 }
