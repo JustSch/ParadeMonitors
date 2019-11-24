@@ -8,6 +8,8 @@ public class GreenStudent implements Runnable {
 	public static long time = System.currentTimeMillis();
 	public int numSeat;
 	public int totalParadeGroups;
+	public int parades;//for parades watched
+	public int puppetShow; //for puppet shows watched
 
 	public GreenStudent(Marching march, String name, int numSeat, int totalParadeGroups) {
 		this.march = march;
@@ -27,9 +29,11 @@ public class GreenStudent implements Runnable {
 			if(!march.isParadeOngoing()) break;
 		
 			try {
+				march.walking();
+				parades++;
 				Thread.sleep(walkingTime);
 				if(!march.isParadeOngoing()) break;
-				march.walking();
+				
 			} catch (InterruptedException e1) {
 				msg("I didn't like the parade so I went home");
 			}
@@ -47,9 +51,11 @@ public class GreenStudent implements Runnable {
 			march.puppetShowWait();
 			if(!march.isParadeOngoing()) break;
 			march.watchingPuppetShow();
+			puppetShow++;
 			if(!march.isParadeOngoing()) break;
 		}
 		msg("i am going home now");
+		msg("i saw "+parades+" parades and "+puppetShow+" puppet shows today");
 	}
 
 	public final void setName(String name) {

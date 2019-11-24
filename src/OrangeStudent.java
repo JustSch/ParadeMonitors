@@ -7,6 +7,8 @@ public class OrangeStudent implements Runnable {
 	public int numSeat;
 	public int mySeat;
 	public int totalParadeGroups;
+	public int parades;//for parades watched
+	public int puppetShow; //for puppet shows watched
 
 	public OrangeStudent(Marching march, String name, int numSeat, int totalParadeGroups) {
 		this.march = march;
@@ -30,6 +32,7 @@ public class OrangeStudent implements Runnable {
 			
 			try {
 				march.walking();
+				parades++;
 				Thread.sleep(walkingTime);  //sleep/march for random time in parade
 				if(!march.isParadeOngoing()) break;
 			} catch (InterruptedException e1) {
@@ -49,9 +52,11 @@ public class OrangeStudent implements Runnable {
 			march.puppetShowWait();
 			if(!march.isParadeOngoing()) break;
 			march.watchingPuppetShow();
+			puppetShow++;
 			if(!march.isParadeOngoing()) break;
 		}
 		msg("i am going home now");
+		msg("i saw "+parades+" parades and "+puppetShow+" puppet shows today");
 
 	}
 
