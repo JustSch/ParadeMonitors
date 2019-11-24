@@ -36,6 +36,7 @@ public class Clock implements Runnable {
 
 	public void run() {
 		setName(clockName);
+		
 		march.readyPuppetShow();
 		march.setParadeIsOngoing();
 		Thread staffMember = new Thread(new StaffMember(march, "Staff Member", StaffNotifier,numSeat));
@@ -45,7 +46,7 @@ public class Clock implements Runnable {
 		try {
 			//waiting();
 			//setParadeOngoing!!!!!!
-			
+			msg("The Parade Is Starting: Please Wait In Line");
 			Thread.sleep(1500);//"sleep" while they line up for parade CHANGE to random time!!!
 			releaseGroups();
 			march.resetNum();
@@ -73,6 +74,8 @@ public class Clock implements Runnable {
 			
 			march.releasing(StaffNotifier);
 			msg("It is 4:00PM. The Final Parade has Started");
+			
+			msg("The Parade has ended. You Don't have to go home but, you can't stay here");
 			// ClockNotifier.wait();
 		} catch (InterruptedException e) {
 			System.out.println("Error: The Clock is Broken. Please Call The Technictian!!");
