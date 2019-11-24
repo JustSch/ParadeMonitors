@@ -55,7 +55,7 @@ public class GreenStudent implements Runnable {
 			if(!march.isParadeOngoing()) break;
 		}
 		msg("i am going home now");
-		msg("i saw "+parades+" parades and "+puppetShow+" puppet shows today");
+		msg("i participated in "+parades+" parades and saw "+puppetShow+" puppet shows today");
 	}
 
 	public final void setName(String name) {
