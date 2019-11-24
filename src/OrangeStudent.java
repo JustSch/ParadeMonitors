@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class OrangeStudent implements Runnable {
 	private Marching march = null;
@@ -22,16 +23,20 @@ public class OrangeStudent implements Runnable {
 		setName(name);
 
 		// System.out.println(Thread.currentThread().getName());
+		Random random = new Random();
+		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
 		while (march.isParadeOngoing()) {
 			int waiting = march.letOrangeInParade();
-			/*
-			 * try { march.paradeWaiting(waiting); } catch (Exception e) {
-			 * msg("Im lining up for the parade"); }
-			 */
+			
 			march.paradeWaiting(waiting%totalParadeGroups);
 			msg(String.valueOf(march.isParadeOngoing()));
 			if(!march.isParadeOngoing()) break;
 			march.walking();
+			try {
+				Thread.sleep(walkingTime);
+			} catch (InterruptedException e1) {
+				msg("I didn't like the parade so I went home");
+			}
 			if(!march.isParadeOngoing()) break;
 			
 			msg("I have exited the parade");

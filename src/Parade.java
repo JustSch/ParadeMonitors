@@ -6,9 +6,9 @@ public class Parade extends Object {
 
 	public static void main(String[] args) {
 
-		int numGreen = 14;
-		int numOrange = 7;
-		int numSeat = 6; // tent capacity
+		int numGreen = 14; //default green student
+		int numOrange = 7; //default orange students
+		int numSeat = 6; //default tent capacity
 		
 		try {
 			numGreen = Integer.valueOf(args[0]); //used if values given via command line
@@ -24,8 +24,7 @@ public class Parade extends Object {
 
 		Marching march = new Marching();
 		march.startParade(numOrange);
-		Random random = new Random();
-		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
+		
 
 		Thread clockThread = new Thread(new Clock("Clock", Marching.getClockNotifier(), numOrange, march, numSeat)); // Makes
 

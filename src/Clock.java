@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Clock implements Runnable {
 
@@ -36,7 +37,8 @@ public class Clock implements Runnable {
 
 	public void run() {
 		setName(clockName);
-		
+		Random random = new Random();
+		int walkingTime = 1000 + random.nextInt(1000);// for walking around 20 min
 		march.readyPuppetShow();
 		march.setParadeIsOngoing();
 		Thread staffMember = new Thread(new StaffMember(march, "Staff Member", StaffNotifier,numSeat));
@@ -47,7 +49,7 @@ public class Clock implements Runnable {
 			//waiting();
 			//setParadeOngoing!!!!!!
 			msg("The Parade Is Starting: Please Wait In Line");
-			Thread.sleep(1500);//"sleep" while they line up for parade CHANGE to random time!!!
+			Thread.sleep(walkingTime);//"sleep" while they line up for parade CHANGE to random time!!!
 			try {
 				releaseGroups();
 				march.startParade(total);

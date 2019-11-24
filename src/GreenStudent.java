@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class GreenStudent implements Runnable {
 
@@ -20,6 +21,8 @@ public class GreenStudent implements Runnable {
 		// TODO Auto-generated method stub
 		setName(name);
 		// System.out.println(Thread.currentThread().getName());
+		Random random = new Random();
+		int walkingTime = 2000 + random.nextInt(500);// for walking around 20 min
 		while (march.isParadeOngoing()) {
 			int waiting = march.letGreenInParade(); // add then get number to wait on.//have it return number needed
 													// after
@@ -33,11 +36,16 @@ public class GreenStudent implements Runnable {
 			if(!march.isParadeOngoing()) break;
 			// msg("I have entered the parade");
 			march.walking();
+			try {
+				Thread.sleep(walkingTime);
+			} catch (InterruptedException e1) {
+				msg("I didn't like the parade so I went home");
+			}
 			if(!march.isParadeOngoing()) break;
 			msg("I have exited the parade");
 			try {
 				msg("I Have Taken a Snack Break");
-				Thread.sleep(2000);
+				Thread.sleep(walkingTime);
 				if(!march.isParadeOngoing()) break;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
